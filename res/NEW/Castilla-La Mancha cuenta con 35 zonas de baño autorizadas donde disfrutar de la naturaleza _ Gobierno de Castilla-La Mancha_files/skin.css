@@ -1,0 +1,138 @@
+/*
+
+	CAR. VISITA CLM
+________________________________________________________________________________________________________________________________*/
+.jcarousel-skin-visita .jcarousel-direction-rtl {direction: rtl;}
+.jcarousel-skin-visita .jcarousel-container-horizontal {/*width:79%;*/ width:100%; height:18em/*quitar*/; /*border: 1px solid #0f0;*/ overflow:hidden;	margin-bottom:1.5em;}
+
+.jcarousel-skin-visita .jcarousel-clip {	/*border: 1px solid #ff0;*/  overflow: hidden;	float:left;	position:relative;	width:100%;	height:auto;}
+
+.jcarousel-skin-visita .jcarousel-item {height:auto; display:inline;}
+
+.jcarousel-skin-visita .jcarousel-item-horizontal {margin:0;}
+.jcarousel-skin-visita .jcarousel-direction-rtl .jcarousel-item-horizontal {margin:0;}
+
+.jcarousel-skin-visita .jcarousel-item-placeholder {background: #fff; color: #000;}
+
+.mycarousel_visita li {display:inline;}
+.mycarousel_visita li img {clear:right; max-width:100%; height:18em /*quitar*/;}
+
+.jcarousel-skin-visita .jcarousel-next-horizontal {position:absolute; top:80px; right:0; width:40px; height:40px; cursor:pointer; background:transparent url(next-horizontal_interes.png) no-repeat 0 0;}
+.jcarousel-skin-visita .jcarousel-direction-rtl .jcarousel-next-horizontal {left:5px; right:auto; background-image:url(prev-horizontal_interes.png);}
+.jcarousel-skin-visita .jcarousel-next-horizontal:hover, .jcarousel-skin-interes .jcarousel-next-horizontal:focus {background-position:-40px 0;}
+.jcarousel-skin-visita .jcarousel-next-horizontal:active {background-position: -80px 0;}
+.jcarousel-skin-visita .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-visita .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-visita .jcarousel-next-disabled-horizontal:focus,
+.jcarousel-skin-visita .jcarousel-next-disabled-horizontal:active {cursor:default; background-position:-120px 0;}
+
+.jcarousel-skin-visita .jcarousel-prev-horizontal {position:absolute; top:80px; left:0; width:40px; height:40px; cursor:pointer; background:transparent url(prev-horizontal_interes.png) no-repeat 0 0;}
+.jcarousel-skin-visita .jcarousel-direction-rtl .jcarousel-prev-horizontal {left:auto; right:5px; background-image:url(next-horizontal_interes.png);}
+.jcarousel-skin-visita .jcarousel-prev-horizontal:hover, .jcarousel-skin-visita .jcarousel-prev-horizontal:focus {background-position:-40px 0;}
+.jcarousel-skin-visita .jcarousel-prev-horizontal:active {background-position:-80px 0;}
+.jcarousel-skin-visita .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-visita .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-visita .jcarousel-prev-disabled-horizontal:focus,
+.jcarousel-skin-visita .jcarousel-prev-disabled-horizontal:active {cursor:default; background-position:-120px 0;}
+
+
+/*
+
+	CAR. INTERES
+________________________________________________________________________________________________________________________________*/
+.jcarousel-skin-interes .jcarousel-direction-rtl {direction: rtl;}
+.jcarousel-skin-interes .jcarousel-container-horizontal {width:100%; /*height:5em;*/ /*border: 1px solid #0f0;*/ overflow:hidden;	margin-top:0.5em;}
+
+.jcarousel-skin-interes .jcarousel-clip {	/*border: 1px solid #ff0;*/  overflow: hidden;	float:left;	position:relative;	width:100%;	height:auto;}
+
+.jcarousel-skin-interes .jcarousel-item {height:auto; display:inline;}
+
+.jcarousel-skin-interes .jcarousel-item-horizontal {margin:0;}
+.jcarousel-skin-interes .jcarousel-direction-rtl .jcarousel-item-horizontal {margin:0;}
+
+.jcarousel-skin-interes .jcarousel-item-placeholder {background: #fff; color: #000;}
+
+.mycarousel_interes li {display:inline;}
+.mycarousel_interes li img {clear:right; margin-bottom:0; max-width: 100%;}
+
+.jcarousel-skin-interes .jcarousel-next-horizontal {position:absolute; top:50px; right:0; width:40px; height:40px; cursor:pointer; background:transparent url(next-horizontal_interes.png) no-repeat 0 0;}
+.jcarousel-skin-interes .jcarousel-direction-rtl .jcarousel-next-horizontal {left:5px; right:auto; background-image:url(prev-horizontal_interes.png);}
+.jcarousel-skin-interes .jcarousel-next-horizontal:hover, .jcarousel-skin-interes .jcarousel-next-horizontal:focus {background-position:-40px 0;}
+.jcarousel-skin-interes .jcarousel-next-horizontal:active {background-position: -80px 0;}
+.jcarousel-skin-interes .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-interes .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-interes .jcarousel-next-disabled-horizontal:focus,
+.jcarousel-skin-interes .jcarousel-next-disabled-horizontal:active {cursor:default; background-position:-120px 0;}
+
+/* carrusel de actualidad */
+#block-views-notas-carousel-portadas-block-7 .jcarousel-skin-interes .jcarousel-next-horizontal {position:absolute; top:100px; right:0; width:40px; height:40px; cursor:pointer; background:transparent url(next-horizontal_interes.png) no-repeat 0 0;}
+
+.jcarousel-skin-interes .jcarousel-prev-horizontal {position:absolute; top:50px; left:0; width:40px; height:40px; cursor:pointer; background:transparent url(prev-horizontal_interes.png) no-repeat 0 0;}
+.jcarousel-skin-interes .jcarousel-direction-rtl .jcarousel-prev-horizontal {left:auto; right:5px; background-image:url(next-horizontal_interes.png);}
+.jcarousel-skin-interes .jcarousel-prev-horizontal:hover, .jcarousel-skin-interes .jcarousel-prev-horizontal:focus {background-position:-40px 0;}
+.jcarousel-skin-interes .jcarousel-prev-horizontal:active {background-position:-80px 0;}
+.jcarousel-skin-interes .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-interes .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-interes .jcarousel-prev-disabled-horizontal:focus,
+.jcarousel-skin-interes .jcarousel-prev-disabled-horizontal:active {cursor:default; background-position:-120px 0;}
+/* carrusel de actualidad */
+#block-views-notas-carousel-portadas-block-7 .jcarousel-skin-interes .jcarousel-prev-horizontal {position:absolute; top:100px; left:0; width:40px; height:40px; cursor:pointer; background:transparent url(prev-horizontal_interes.png) no-repeat 0 0;}
+
+/*
+
+	CAR. PREVISIONES
+________________________________________________________________________________________________________________________________*/
+.jcarousel-skin-news .jcarousel-container-vertical {float:left;	position:relative; width: 87.8%; height: 2.5em;/*border: 1px solid #0f0;*/}
+.jcarousel-skin-news .jcarousel-clip {overflow: hidden; width: 100%;}
+.jcarousel-skin-news .jcarousel-clip-vertical {width:94%; height:2.5em; margin-left:4em;}
+
+.jcarousel-skin-news .jcarousel-item {height:2.5em; display:block;}
+.jcarousel-skin-news .jcarousel-item li{margin:0;}
+
+.jcarousel-skin-news .jcarousel-item-vertical {margin-bottom: 0;}
+
+.mycarousel_news li{line-height:2.5em;	width:100%;	margin:0 !important;}
+.mycarousel_news li a{color:#4e4d52;	text-decoration:none;	font-weight:bold;	vertical-align:middle;}
+.mycarousel_news li img{vertical-align:middle;	padding:0 0.2em 0.2em 0;}
+
+.jcarousel-skin-news .jcarousel-next-vertical {position:absolute; top:15px; left:15px; width:19px; height:23px; cursor:pointer; background:transparent url(ico_news_next.png) no-repeat 0 0;}
+.jcarousel-skin-news .jcarousel-prev-vertical {position:absolute; top:3px; left:15px; width:19px; height:23px; cursor:pointer; background:transparent url(ico_news_prev.png) no-repeat 0 0;}
+
+
+/*
+
+	CAR. ACTUACIONES
+________________________________________________________________________________________________________________________________*/
+.jcarousel-skin-actuaciones {width:100%; height:25.8em; overflow:hidden;}
+.jcarousel-skin-actuaciones .jcarousel-direction-rtl {direction: rtl;}
+.jcarousel-skin-actuaciones .jcarousel-container-horizontal {width:100%; /*height:5em;*/ /*border: 1px solid #0f0;*/ overflow:hidden;}
+
+.jcarousel-skin-actuaciones .jcarousel-clip {	/*border: 1px solid #ff0;*/  overflow: hidden;	float:left;	position:relative;	width:100%;	min-height:20em;}
+
+.jcarousel-skin-actuaciones .jcarousel-item {height:auto; display:inline;}
+
+.jcarousel-skin-actuaciones .jcarousel-item-horizontal {margin:0;}
+.jcarousel-skin-actuaciones .jcarousel-direction-rtl .jcarousel-item-horizontal {margin:0;}
+
+.jcarousel-skin-actuaciones .jcarousel-item-placeholder {background: #fff; color: #000;}
+
+.mycarousel_actuaciones li{	display:inline;}
+.mycarousel_actuaciones li img{clear:right;}
+
+.jcarousel-skin-actuaciones .jcarousel-next-horizontal {position:absolute; top:150px; right:0; width:40px; height:40px; cursor:pointer; background:transparent url(next-horizontal_interes.png) no-repeat 0 0;}
+.jcarousel-skin-actuaciones .jcarousel-direction-rtl .jcarousel-next-horizontal {left:5px; right:auto; background-image:url(prev-horizontal_interes.png);}
+.jcarousel-skin-actuaciones .jcarousel-next-horizontal:hover, .jcarousel-skin-actuaciones .jcarousel-next-horizontal:focus {background-position:-40px 0;}
+.jcarousel-skin-actuaciones .jcarousel-next-horizontal:active {background-position: -80px 0;}
+.jcarousel-skin-actuaciones .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-actuaciones .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-actuaciones .jcarousel-next-disabled-horizontal:focus,
+.jcarousel-skin-actuaciones .jcarousel-next-disabled-horizontal:active {cursor:default; background-position:-120px 0;}
+
+.jcarousel-skin-actuaciones .jcarousel-prev-horizontal {position:absolute; top:150px; left:0; width:40px; height:40px; cursor:pointer; background:transparent url(prev-horizontal_interes.png) no-repeat 0 0;}
+.jcarousel-skin-actuaciones .jcarousel-direction-rtl .jcarousel-prev-horizontal {left:auto; right:5px; background-image:url(next-horizontal_interes.png);}
+.jcarousel-skin-actuaciones .jcarousel-prev-horizontal:hover, .jcarousel-skin-actuaciones .jcarousel-prev-horizontal:focus {background-position:-40px 0;}
+.jcarousel-skin-actuaciones .jcarousel-prev-horizontal:active {background-position:-80px 0;}
+.jcarousel-skin-actuaciones .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-actuaciones .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-actuaciones .jcarousel-prev-disabled-horizontal:focus,
+.jcarousel-skin-actuaciones .jcarousel-prev-disabled-horizontal:active {cursor:default; background-position:-120px 0;}

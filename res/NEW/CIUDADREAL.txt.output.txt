@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE TimeML SYSTEM "TimeML.dtd">
+<TimeML>
+El Ayuntamiento concederá 63.000 euros en subvenciones a proyectos culturales
+
+Publicado en 6 <TIMEX3 tid="t2" type="DATE" value="2017-06">junio</TIMEX3>, <TIMEX3 tid="t1" type="DATE" value="2017">2017</TIMEX3> por NCR24 en CIUDAD REAL
+
+La Junta de Gobierno Local del Ayuntamiento de Ciudad Real ha aprobado esta mañana las Bases para la concesión de subvenciones a proyectos de carácter cultural.
+
+Esta convocatoria de subvenciones tiene por objeto el fomento de las actividades culturales organizadas por las asociaciones culturales y empresas de carácter cultural de Ciudad Real capital durante el año 2.017, con el fin de dinamizar la vida cultural en nuestra ciudad y estimular y apoyar sus proyectos y programaciones culturales, en régimen de concurrencia competitiva.
+
+Las actividades objeto de subvención mediante esta convocatoria estarán relacionadas con la música, teatro, exposiciones, cine, conferencias, etc. o actividades que atañan a un evento declarado bien de interés cultural nacional. Según ha explicado la portavoz municipal, Sara Martínez, el presupuesto total será de 63.909 euros.
+
+El máximo de subvención por proyecto será de 5.000 euros. <TIMEX3 tid="t3" type="DATE" value="PRESENT_REF">Ahora</TIMEX3> estas bases se publicarán en el Boletín Oficial de la Provincia y desde entonces se abrirá el plazo de presentación de solicitudes.
+</TimeML>
+

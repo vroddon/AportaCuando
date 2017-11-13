@@ -1,0 +1,2 @@
+java -jar de.unihd.dbs.heideltime.standalone.jar "C:\Users\mnavas\Desktop\EURLEX\NEW\CLM.txt" -c "C:\Users\mnavas\Desktop\config.props" -dct "2016-06-27" -l "SPANISH" -t "NEWS" > ""C:\Users\mnavas\Desktop\EURLEX\NEW\res.txt"
+

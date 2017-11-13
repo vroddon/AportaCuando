@@ -1,0 +1,10 @@
+(function(require, define) {
+define(function(require, exports, module) {
+	var widModule = require('richbutton'), $ = require('jquery'), widgets = require('widgets');
+	var wid = widModule.create({"articleId":119097509,"linkWidget":29445,"hideInvisible":false,"bindClickToImage":true,"includeBodyOffset":false,"position":"MR","location":"ABSOLUTE","openTargetInNewTab":true,"count":1,"keyword":"tarjetas ciudadanas","text":" ","postContent":" ","minImageWidth":100,"minImageHeight":100,"widgetId":29449,"publisherId":2679,"clickUrl":"","clickTarget":"_top","css":["//assets.kaloo.ga/widgets/2679/widget294494f665b.css"],"publisherName":"elcomercio.es","translation":null,"googleAnalytics":false,"omnitureClickTracking":false,"omniturePageTracking":false,"omniturePageName":"Kalooga","publisherGAs":["gtm1, gtm2"],"defaultGaTrackEvent":true,"defaultGaTrackPageview":true,"cdn":false,"comScoreId":"7715761","comScoreEPI":false,"excludeSource":false,"excludeDate":false,"sortVideoStills":0,"retina":true,"chartbeat":false,"adDebug":false,"kicker":false,"inViewAds":false,"language":"es","type":"richbutton"});
+	var e = $('.kalooga_29449');
+	if(e.length > 0) widgets.print(wid, e);
+	return wid;
+});
+
+})(kalooga.require, kalooga.define);

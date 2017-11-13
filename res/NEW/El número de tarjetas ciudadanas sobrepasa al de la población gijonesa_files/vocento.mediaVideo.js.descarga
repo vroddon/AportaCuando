@@ -1,0 +1,454 @@
+var Vocento = Vocento || {};
+
+Vocento.MediaVideo = function($, mediaConfig, mediaUtils, pageUrl){
+	
+    /**
+     * Version del js
+     */
+    var version = '2.0';
+    
+    /**
+     * Log
+     */
+    var log = mediaUtils.log;
+       
+    /**
+     * tipo media (video, gallery, audio, graph, videolive, videochat)
+     */
+    var mediaType = 'video';
+    
+    /**
+     * URL de la pagina actual
+     */
+    var url = (pageUrl) ? pageUrl : document.URL;
+    
+	function loadMultimedia(div, w, h, sFile, sPreview, sPortal, sTitle, sCategory, opciones){
+		//old request ever NO modal Layer
+		opciones.capaModal = false;
+		loadVideoABC(div, w, h, sFile, sPreview, sPortal, sCategory, opciones);
+	}
+	
+	function loadVideoABC(div, w, h, sFile, sPreview, sPortal, sCategory, opciones) {
+		var opcionesOK = null;
+		if(mediaUtils.isEmpty(opciones)){
+			opciones = {};
+		}
+		opcionesOK = {
+					modoExtendido: "player",
+					idModulo: (opciones.idModulo == undefined) ? '' : opciones.idModulo,
+					medio: (opciones.site == undefined) ? sPortal : opciones.site,
+					idPlayer: (opciones.idPlayer == undefined) ? '' : opciones.idPlayer,
+					edicionLocal: (opciones.edicionLocal == undefined) ? '' : opciones.edicionLocal,
+					idDivVideo: div,
+					idVideo: sFile,
+					origenVideo: (sCategory == undefined) ? 'bc' : sCategory,
+			 		nameVideo: (opciones.txtTitular == undefined) ? '' : opciones.txtTitular, 
+			 		linkURLVideo: (opciones.urlTitular == undefined) ? '' : opciones.urlTitular,
+			 		longDescriptionVideo: (opciones.entradilla == undefined) ? '' : opciones.entradilla,
+			 		shortDescriptionVideo: (opciones.entradilla == undefined) ? '' : opciones.entradilla,
+			 		widthVideo: w,
+			 		heightVideo: h,
+			 		stillURLVideo: (opciones.imgPrevia == undefined) ? sPreview : opciones.imgPrevia,
+			 		apoyoTexto: (opciones.apoyoTexto == undefined) ? '' : opciones.apoyoTexto,
+					apoyoURL: (opciones.apoyoURL == undefined) ? '' : opciones.apoyoURL,
+					antetituloTexto: (opciones.antetituloTexto == undefined) ? '' : opciones.antetituloTexto,
+					capaModal: (opciones.capaModal == undefined) ? true : opciones.capaModal,
+					publicidadOn: (opciones.publicidadOn == undefined) ? true : opciones.publicidadOn,
+					comentarios: (opciones.comentarios == undefined) ? '' : opciones.comentarios,
+					redesSociales: (opciones.redesSociales == undefined) ? true : opciones.redesSociales,
+					imgPatrocinio: (opciones.imgPatrocinio == undefined) ? '' : opciones.imgPatrocinio,
+					urlPatrocinio: (opciones.urlPatrocinio == undefined) ? '' : opciones.urlPatrocinio,
+					clickcommand: (opciones.clickcommand == undefined) ? '' : opciones.clickcommand,
+					usoResizer: (opciones.usoResizer == undefined) ? true : opciones.usoResizer,
+					autoStartVideo: (opciones.autoStartVideo == undefined) ? true : opciones.autoStartVideo
+			    };
+		if(opcionesOK.widthVideo == '644') opcionesOK.capaModal = false;
+		cargaVideo(opcionesOK);
+	}
+	
+	function cargaVideo(options){
+		initVideoPlayer(options);
+	}
+	
+	function initVideoPlayer(options){
+		options = addNewOptions(options);
+		urlVideoPlayer = getUrlVideoPlayer(mediaType, options);
+		previewVideoPlayer(urlVideoPlayer, options);
+	}
+	
+	function previewVideoPlayer(urlPlayer, options){
+		mediaUtils.previewPlayer(urlPlayer, options);
+	}
+	
+	function openVideo(options){
+		showVideoPlayer(options);
+	}
+	
+	function showVideoPlayer(options){
+		options = addNewOptions(options);
+		if(options.template.indexOf('.html.twig') != -1){
+			options.template = options.template.indexOf(':viewvideo') == -1 ? mediaUtils.replaceAll(options.template, 'ShowVideo', ''):options.template;
+			options.template = options.template.indexOf(':viewvideo') == -1 ? mediaUtils.replaceAll(options.template, ':previewvideo', ':viewvideo'):options.template;
+		}else{
+			options.template = options.template.indexOf('ShowVideo') == -1 ? options.template.concat('ShowVideo'):options.template;
+		}
+		//options.template = options.template.indexOf('ShowVideo') == -1 ? options.template.concat('ShowVideo'):options.template;
+		//options.template = options.template.indexOf(':viewvideo') == -1 ? mediaUtils.replaceAll(options.template, 'ShowVideo', ''):options.template;
+		//options.template = options.template.indexOf(':viewvideo') == -1 ? mediaUtils.replaceAll(options.template, ':previewvideo', ':viewvideo'):options.template;
+		if(!mediaUtils.isEmpty(options.idModulo))
+			options.idModulo = options.idModulo.indexOf('ShowVideo') == -1 ? options.idModulo.concat('ShowVideo'):options.idModulo; 
+		urlVideoPlayer = getUrlVideoPlayer(mediaType, options);
+		getScriptsVideoPlayer(options);
+		viewVideoPlayer(urlVideoPlayer, options);
+	}
+	
+	function viewVideoPlayer(urlVideoPlayer, options){
+		mediaUtils.viewPlayer(urlPlayer, options);
+	}
+	
+	function addNewOptions(options){
+		options.mediaType = mediaType;
+		options.modoExtendido = mediaUtils.isEmpty(options.modoExtendido) ? 'player' : options.modoExtendido;
+		options.site = mediaUtils.isEmpty(options.site) ? options.medio : options.site;
+		if(options.site == 'abcsevilla') options.site = 'sevilla.abc';
+		if(options.site == 'abcdesevilla') options.site = 'sevilla.abc';
+		if(options.site == 'hoycinema') options.site = 'hoycinema.abc';
+		if(options.site == 'laguiatv') options.site = 'laguiatv.abc';
+		if(options.site == 'hoymujer') options.site = 'mujerhoy';
+		options.medio = options.site;
+		options.idModulo = 	mediaUtils.isEmpty(options.idModulo) ? '' : options.idModulo;
+		options.template = mediaUtils.isEmpty(options.template) ? options.idModulo : options.template;
+		options.template = mediaUtils.isEmpty(options.template) ? mediaConfig.sites[options.site]['template-default-player']['video'] : options.template;
+		options.idModulo = mediaUtils.isEmpty(options.idModulo) ? options.template : options.idModulo;
+		options.edition = mediaUtils.isEmpty(options.edition) ? options.edicionLocal : options.edition;
+		options.edicionLocal = options.edition;
+		options.idPlayer = mediaUtils.isEmpty(options.idPlayer) ? '' : options.idPlayer;
+		options.idDiv = mediaUtils.isEmpty(options.idDivVideo) ? options.idDiv : options.idDivVideo;
+		options.idDivVideo = options.idDiv;
+		options.idOptions = mediaUtils.isEmpty(options.idOpciones) ? options.idOptions : options.idOpciones;
+		options.idOpciones = options.idOptions;
+		options.loid = mediaUtils.isEmpty(options.loid) ? '' : options.loid;
+		options.code = mediaUtils.isEmpty(options.codigoVideo) ? options.code : options.codigoVideo;
+		options.codigoVideo = options.code;
+		options.file = mediaUtils.isEmpty(options.file) ? '' : options.file;
+		options.source = mediaUtils.isEmpty(options.origenVideo) ? options.source : options.origenVideo;
+		options.origenVideo = options.source;
+		if(options.source.toLowerCase() == 'bc') options.source = 'brightcove';
+		if(options.source.toLowerCase() == 'pg' || options.source.toLowerCase() == 'perform') options.source = 'performgroup';
+		if(options.source.toLowerCase() == 'ytb') options.source = 'youtube';
+		options.id = mediaUtils.isEmpty(options.idVideo) ? options.id : options.idVideo;
+		options.idVideo = options.id;
+		options.idChannel = mediaUtils.isEmpty(options.idChannel) ? '' : options.idChannel;
+		options.name = mediaUtils.isEmpty(options.nameVideo) ? options.name : options.nameVideo;
+		options.nameVideo = options.name;
+		options.shortDescription = mediaUtils.isEmpty(options.shortDescriptionVideo) ? options.shortDescription : options.shortDescriptionVideo;
+		options.shortDescriptionVideo = options.shortDescription;
+		options.antetituloTexto = mediaUtils.isEmpty(options.antetituloTexto) ? '' : options.antetituloTexto;
+		options.shortDescription = mediaUtils.isEmpty(options.shortDescription) ? options.antetituloTexto : options.shortDescription;
+		options.longDescription = mediaUtils.isEmpty(options.longDescriptionVideo) ? options.longDescription : options.longDescriptionVideo;
+		options.longDescriptionVideo = options.longDescription;
+		options.linkURL = mediaUtils.isEmpty(options.linkURLVideo) ? options.linkURL : options.linkURLVideo;
+		options.linkURLVideo = options.linkURL;
+		options.stillURL = mediaUtils.isEmpty(options.stillURLVideo) ? options.stillURL : options.stillURLVideo;
+		options.stillURLVideo = options.stillURL;
+		options.urlXml = mediaUtils.isEmpty(options.urlXml) ? options.linkURLVideo : options.urlXml;
+		options.urlXml = mediaUtils.isEmpty(options.urlXml) ? '' : options.urlXml.replace('.html', '.xml');
+		options.author = mediaUtils.isEmpty(options.authorVideo) ? options.author : options.authorVideo;
+		options.authorVideo = options.author;
+		options.firm = mediaUtils.isEmpty(options.originVideo) ? options.firm : options.originVideo;
+		options.originVideo = options.firm;
+		options.autoStartVideo = mediaUtils.isEmpty(options.autoStartVideo) ? 'true' : options.autoStartVideo.toString();
+		options.autoStart = mediaUtils.isEmpty(options.autoStart) ? 'true' : options.autoStart.toString();
+		options.autoStartVideo = (options.autoStartVideo == 'true' && options.autoStart == 'true') ? 'true' : 'false';
+		options.autoStart = options.autoStartVideo;
+		options.width = mediaUtils.isEmpty(options.widthVideo) ? options.width : options.widthVideo;
+		options.widthVideo = options.width;
+		options.height = mediaUtils.isEmpty(options.heightVideo) ? options.height : options.heightVideo;
+		options.heightVideo = options.height;
+		options.classs = mediaUtils.isEmpty(options.classVideo) ? options.classs : options.classVideo;
+		options.classVideo = options.classs;
+		options.capaModal = mediaUtils.isEmpty(options.capaModal) ? 'true' : options.capaModal.toString();
+		options.modalLayer = mediaUtils.isEmpty(options.modalLayer) ? 'true' : options.modalLayer.toString();
+		options.capaModal = (options.capaModal == 'true' && options.modalLayer == 'true') ? 'true' : 'false';
+		options.modalLayer = options.capaModal;
+		options.live = mediaUtils.isEmpty(options.live) ? 'false' : options.live.toString();
+		options.socialNetworks = mediaUtils.isEmpty(options.socialNetworks) ? 'false' : options.socialNetworks.toString();
+		options.usoResizer = mediaUtils.isEmpty(options.usoResizer) ? 'true' : options.usoResizer.toString();
+		options.resizer = mediaUtils.isEmpty(options.resizer) ? 'true' : options.resizer;
+		options.usoResizer = (options.usoResizer == 'true' && options.resizer == 'true') ? 'true' : 'false';
+		options.resizer = options.usoResizer;
+		options.charset = mediaUtils.isEmpty(options.charset) ? mediaUtils.getCharset() : options.charset;
+		options.language = mediaUtils.isEmpty(options.language) ? mediaUtils.getLanguage() : options.language;
+		options.location = mediaUtils.isEmpty(options.location) ? mediaUtils.getLocation() : options.location;
+		options.device = mediaUtils.isEmpty(options.device) ? mediaUtils.getDevice() : options.device;
+		options.dispositivo = options.device;
+		options.protocol = mediaUtils.isEmpty(options.protocol) ? mediaUtils.getProtocol() : options.protocol;
+		options.gigyaUserType = mediaUtils.isEmpty(options.gigyaUserType) ? mediaUtils.getGigyaUserType() : options.gigyaUserType;
+		
+		optionsTemp = {};
+		if(mediaConfig.sites[options.site]['media-url'][mediaType].toLowerCase().indexOf('modgen') != -1){
+			optionsKeys = ['modoExtendido', 'idModulo', 'template', 'medio', 'site', 'edicionLocal', 'idDivVideo', 'idDiv', 
+			               'idOpciones', 'loid', 'codigoVideo', 'file', 'origenVideo', 'source', 'idPlayer', 'idVideo', 'nameVideo', 'shortDescriptionVideo', 
+			               'antetituloTexto', 'longDescriptionVideo', 'linkURLVideo', 'stillURL', 'stillURLVideo', 'urlXml', 'authorVideo', 'originVideo', 'autoStartVideo', 
+			               'widthVideo', 'heightVideo', 'classVideo', 'capaModal', 'modalLayer', 'live', 'usoResizer', 'charset', 'language', 'location', 
+			               'dispositivo', 'protocol', 'gigyaUserType'];
+		}else{
+			optionsKeys = ['mediaType', 'template', 'site', 'edition', 'idDiv', 'loid', 'code', 'file', 'source', 'idPlayer', 'id', 'idChannel', 'name', 
+			               'shortDescription', 'longDescription', 'linkURL', 'stillURL', 'urlXml', 'author', 'firm', 'autoStart', 
+			               'width', 'height', 'classs', 'modalLayer', 'live', 'socialNetworks', 'resizer', 'charset', 'language', 'location', 'device', 
+			               'protocol', 'gigyaUserType'];
+		}
+		for(var key in options) {
+			//if(optionsKeys.indexOf(key) != -1){
+			if(mediaUtils.arrayIndexOf(optionsKeys,key) != -1){
+				if(!mediaUtils.isEmpty(options[key])){
+					optionsTemp[key] = options[key];
+				}
+			}
+		}
+		options = optionsTemp;
+		
+		return options;
+	}
+	
+	function getUrlVideoPlayer(mediaType, options){
+		urlVideoPlayer = '';
+		urlVideoPlayer = mediaUtils.getUrlPlayer(mediaType, options);
+		return urlVideoPlayer;
+	}
+	
+	function getScriptsVideoPlayer(options) {
+		if(options.source === 'bc' || options.source == 'brightcove'){
+			//BRIGHTCOVE
+			if(typeof brightcove === 'undefined' && options.protocol === 'https'){
+				$.getScript('https://sadmin.brightcove.com/js/BrightcoveExperiences.js', function(){
+					return true;
+				}, true);
+			}else if(typeof brightcove === 'undefined'){
+				$.getScript('https://sadmin.brightcove.com/js/BrightcoveExperiences.js', function(){
+					return true;
+				}, true);
+			}else{
+				return true;
+			}
+		}else if(options.source == 'pg' || options.source == 'perform' || options.source == 'performgroup'){
+			//PERFORM GROUP
+			if(typeof addCustomPlayer === 'undefined'){
+				$.getScript('http://static.eplayer.performgroup.com/flash/js/swfobject.js', function() {
+					$.getScript('http://static.eplayer.performgroup.com/flash/js/performgroup.js', function() {
+						return true;
+					}, true);
+				}, true);
+			}else{
+				return true;
+			}
+		}else{
+			//NO BRIGHTCOVE, NO PERFORMGROUP
+			return true;
+		}
+	}
+	
+	//metodos eventos player flash brightcove
+	
+	var players = [];
+	
+	function onTemplateLoad(idPlayer){
+		// Add each player's id to the players array
+		players.push(idPlayer);
+	}
+	 
+	function onTemplateReady(event){
+		var player = brightcove.api.getExperience(event.target.experience.id);
+		var moduleVideoPlayer = player.getModule(brightcove.api.modules.APIModules.VIDEO_PLAYER);
+		var moduleExperience = player.getModule(brightcove.api.modules.APIModules.EXPERIENCE);
+        var moduleContent = player.getModule(brightcove.api.modules.APIModules.CONTENT);
+		moduleVideoPlayer.addEventListener(brightcove.api.events.MediaEvent.ERROR, function(event) {onMediaError(event);});
+		moduleVideoPlayer.addEventListener(brightcove.api.events.MediaEvent.BEGIN, function(event) {onMediaBegin(event);});
+		moduleVideoPlayer.addEventListener(brightcove.api.events.MediaEvent.CHANGE, function(event) {onMediachange(event);});
+		//moduleVideoPlayer.addEventListener(brightcove.api.events.MediaEvent.SEEK, function(event) {onMediaSeek(event);});
+		//moduleVideoPlayer.addEventListener(brightcove.api.events.MediaEvent.SEEK_NOTIFY, function(event) {onMediaSeekNotify(event);});
+		//moduleVideoPlayer.addEventListener(brightcove.api.events.MediaEvent.VOLUME_CHANGE, function(event) {onMediaVolumeChange(event);});
+		moduleVideoPlayer.addEventListener(brightcove.api.events.MediaEvent.PLAY, function(event) {onMediaPlay(event);});
+		moduleVideoPlayer.addEventListener(brightcove.api.events.MediaEvent.STOP, function(event) {onMediaStop(event);});
+		moduleVideoPlayer.addEventListener(brightcove.api.events.MediaEvent.PROGRESS, function(event) {onMediaProgress(event);});
+		moduleVideoPlayer.addEventListener(brightcove.api.events.MediaEvent.COMPLETE, function(event) {onMediaComplete(event);});
+	}
+	
+	function onTemplateError(event){
+	}
+	
+	function onMediaError(event){
+		//implementacion publica de eventos
+		if(typeof mediaVideoError !== "undefined") {
+			mediaVideoError();
+		}
+	}
+	
+	function onMediaBegin(event){
+	}
+	
+	function onMediaChange(event) {
+	}
+	
+	function onMediaSeek(event) {
+	}
+	
+	function onMediaSeekNotify(event) {
+	}
+	
+	function onMediaVolumeChange(event) {
+	}
+
+	function onMediaPlay(event) {
+		var id = event.target.experience.id;
+		// Loop through the players array, and stop the others
+		for (var i = 0; i < players.length; i++) {
+			if (players[i] != id) {
+				var player = brightcove.api.getExperience(players[i]);
+				var videoPlayer = player.getModule(brightcove.api.modules.APIModules.VIDEO_PLAYER);
+				videoPlayer.pause(true);
+			}
+		}
+		//implementacion publica de eventos
+		if(typeof mediaVideoPlay !== "undefined") {
+			mediaVideoPlay();
+		}
+	}
+	
+	function onMediaStop(event) {
+		//implementacion publica de eventos
+		if(typeof mediaVideoStop !== "undefined") {
+			mediaVideoStop();
+		}
+	}
+	
+	function onMediaProgress(event) {
+	}
+	
+	function onMediaComplete(event) {
+		//implementacion publica de eventos
+		if(typeof mediaVideoComplete !== "undefined") {
+			mediaVideoComplete();
+		}
+	}
+	
+	//metodos eventos player html5 brightcove
+	videojsPlayers = [];
+	function onplayerbccatalogerror(myPlayer){
+		//console.log('brightcove player->onplayerbccatalogerror');
+	}
+	function onplayerdurationchange(myPlayer){
+		//console.log('brightcove player->onplayerdurationchange');
+	}
+	function onplayerended(myPlayer){
+		//console.log('brightcove player->onplayerended');
+		//document.getElementById(myPlayer.id_).getElementsByClassName("vjs-poster")[0].style.display = "block";
+		myPlayer.el().getElementsByClassName('vjs-poster')[0].style.display = "block";
+	}
+	function onplayererror(myPlayer){
+		//console.log('brightcove player->onplayererror');
+	}
+	function onplayerfirstplay(myPlayer){
+		//console.log('brightcove player->onplayerfirstplay');
+	}
+	function onplayerfullscreenchange(myPlayer){
+		//console.log('brightcove player->onplayerfullscreenchange');
+	}
+	function onplayerloadedalldata(myPlayer){
+		//console.log('brightcove player->onplayerloadedalldata');
+	}
+	function onplayerloadeddata(myPlayer){
+		//console.log('brightcove player->onplayerloadeddata');
+	}
+	function onplayerloadedmetadata(myPlayer){
+		//console.log('brightcove player->onplayerloadedmetadata');
+	}
+	function onplayerloadstart(myPlayer){
+		//console.log('brightcove player->onplayerloadstart'+myPlayer.id_);
+		//document.getElementById(myPlayer.id_).getElementsByClassName("vjs-poster")[0].style.backgroundImage = "url('"+myPlayer.poster()+"')"
+		myPlayer.el().getElementsByClassName('vjs-poster')[0].style.backgroundImage = "url('"+myPlayer.poster()+"')";
+		//add players
+		videojsPlayers.push(myPlayer);
+	}
+	function onplayerpause(myPlayer){
+		//console.log('brightcove player->onplayerpause');
+	}
+	function onplayerplay(myPlayer){
+		//console.log('brightcove player->onplayerplay');
+		//document.getElementById(myPlayer.id_).getElementsByClassName("vjs-poster")[0].style.display = "none";
+		myPlayer.el().getElementsByClassName('vjs-poster')[0].style.display = "none";
+		//only one player play (pause others)
+		//for (videojsPlayer in videojsPlayers) {
+		for (var i = 0; i < videojsPlayers.length; i++) {
+			//console.log(videojsPlayers[videojsPlayer]);
+			videojsPlayer = videojsPlayers[i];
+			//console.log(videojsPlayer.id_+"----"+myPlayer.id_);
+			if(videojsPlayer.id_ != myPlayer.id_){
+				videojsPlayer.pause();
+			}
+		}
+	}
+	function onplayerprogress(myPlayer){
+		//console.log('brightcove player->onplayerprogress');
+	}
+	function onplayerresize(myPlayer){
+		//console.log('brightcove player->onplayerresize');
+	}
+	function onplayerseeked(myPlayer){
+		//console.log('brightcove player->onplayerseeked');
+	}
+	function onplayerseeking(myPlayer){
+		//console.log('brightcove player->onplayerseeking');
+	}
+	function onplayertimeupdate(myPlayer){
+		//console.log('brightcove player->onplayertimeupdate');
+	}
+	function onplayervolumechange(myPlayer){
+		//console.log('brightcove player->onplayervolumechange');
+	}
+	function onplayerwaiting(myPlayer){
+		//console.log('brightcove player->onplayerwaiting');
+	}
+	
+	/**
+	 * Metodos publicos
+	 */
+	return {
+	    version: function() {
+	        return version;
+	    }
+		,players: function() {
+			return players;
+		}
+		,loadMultimedia : loadMultimedia
+		,loadVideoABC : loadVideoABC
+		,cargaVideo : cargaVideo
+		,initVideoPlayer : initVideoPlayer
+		,openVideo : openVideo
+		//,viewVideoPlayer : viewVideoPlayer
+		//metodos eventos player flash brightcove
+		,showVideoPlayer: showVideoPlayer
+		,onTemplateLoad : onTemplateLoad
+		,onTemplateReady : onTemplateReady
+		//metodos eventos player html5 brightcove
+		,onplayerbccatalogerror : onplayerbccatalogerror
+		,onplayerdurationchange : onplayerdurationchange
+		,onplayerended : onplayerended
+		,onplayererror : onplayererror
+		,onplayerfirstplay : onplayerfirstplay
+		,onplayerfullscreenchange : onplayerfullscreenchange
+		,onplayerloadedalldata : onplayerloadedalldata
+		,onplayerloadeddata : onplayerloadeddata
+		,onplayerloadedmetadata : onplayerloadedmetadata
+		,onplayerloadstart : onplayerloadstart
+		,onplayerpause : onplayerpause
+		,onplayerplay : onplayerplay
+		,onplayerprogress : onplayerprogress
+		,onplayerresize : onplayerresize
+		,onplayerseeked : onplayerseeked
+		,onplayerseeking : onplayerseeking
+		,onplayertimeupdate : onplayertimeupdate
+		,onplayervolumechange : onplayervolumechange
+		,onplayerwaiting : onplayerwaiting
+	};
+};

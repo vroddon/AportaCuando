@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE TimeML SYSTEM "TimeML.dtd">
+<TimeML>
+<TIMEX3 tid="t1" type="DATE" value="2016-06-27">27/06/2016</TIMEX3> Consejería de Sanidad
+Con la llegada <TIMEX3 tid="t3" type="DATE" value="2017-SU">del verano</TIMEX3> y como alternativa a otros destinos
+Castilla-La Mancha cuenta con 35 zonas de baño autorizadas donde disfrutar de la naturaleza
+
+Para la prevención de riesgos para la salud la Dirección General de Salud Pública y Consumo ha puesto en marcha el Programa Regional de Vigilancia Sanitaria de las Aguas de Uso Recreativo.
+ 
+La calidad de las aguas de las zonas de baño de Castilla-La Mancha se puede consultar en el Sistema de Información Nacional de Aguas de Baño (NAYADE).
+
+Toledo, <TIMEX3 tid="t6" type="DATE" value="2016-06-27">27 de junio de 2016</TIMEX3>.- Con la llegada de los meses de <TIMEX3 tid="t9" type="DATE" value="2017-SU">verano</TIMEX3> y como alternativa a las playas marítimas, en Castilla-La Mancha se puede disfrutar de una extensa red de playas y zonas de baño continentales. Para ello, nuestra Comunidad Autónoma cuenta con espacios habilitados y controlados donde se puede gozar de la naturaleza y parajes tranquilos de extraordinaria belleza.
+ 
+“Para esta temporada Castilla-La Mancha cuenta con un total de 35 zonas de baño interior autorizadas, correspondientes a 23 municipios e integradas en las demarcaciones hidrográficas del Júcar, Tajo, Guadiana y Guadalquivir”, ha informado el director general de Salud Pública y Consumo de la Consejería de Sanidad, Manuel Tordera.
+ 
+Estas actividades están reguladas por Real Decreto <TIMEX3 tid="t10" type="DATE" value="1341">1341</TIMEX3>/<TIMEX3 tid="t11" type="DATE" value="2007">2007</TIMEX3>, <TIMEX3 tid="t17" type="DATE" value="2017-10-11">de 11 de octubre</TIMEX3> sobre la gestión de la calidad de las aguas de baño, incorporando al derecho español la Directiva <TIMEX3 tid="t12" type="DATE" value="2006">2006</TIMEX3>/7/CE del Parlamento Europeo y del Consejo <TIMEX3 tid="t16" type="DATE" value="2006-02-15">de 15 de febrero de 2006</TIMEX3> relativa a la gestión de la calidad de las aguas de baño.
+ 
+Vigilancia
+ 
+Para la prevención de riesgos para la salud vinculada al uso del agua con fines recreativos, la Dirección General de Salud Pública y Consumo de la Consejería de Sanidad ha puesto en marcha el Programa Regional de Vigilancia Sanitaria de las Aguas de Uso Recreativo, que se ejecuta a través de las Secciones responsables de Salud Ambiental y los Distritos de Salud Pública.
+ 
+“La vigilancia de las playas y aguas de baño está basada fundamentalmente en la inspección ocular de la playa y el agua, la toma de muestras y el análisis de las aguas”, ha subrayado Tordera.
+ 
+Cada inspección conlleva una calificación de carácter sanitario tanto de la playa como del agua de baño, siguiendo los criterios establecidos en el Real Decreto <TIMEX3 tid="t20" type="DATE" value="1341">1341</TIMEX3>/<TIMEX3 tid="t21" type="DATE" value="2007">2007</TIMEX3>.  Como resultado de esta labor de prevención se han mejorado sustancialmente las condiciones higiénico-sanitarias de las zonas de baño en nuestra Comunidad Autónoma.
+ 
+Así, desde el inicio de la temporada la Consejería de Sanidad emite informes de la calidad de las aguas con una periodicidad quincenal y hasta que finalice la temporada de baño, <TIMEX3 tid="t23" type="DATE" value="2017-09-15">el 15 de septiembre</TIMEX3>.
+ 
+La calidad de las aguas de las zonas de baño de Castilla-La Mancha se puede consultar en el Sistema de Información Nacional de Aguas de Baño (NAYADE) en http://nayade.msc.es/Splayas/home.html.
+ 
+La Consejería recuerda que los ayuntamientos son los encargados de mantener las condiciones de limpieza y salubridad de las playas de las zonas de baño, colocar carteles informativos con las características, infraestructuras y medidas de seguridad, así como de vigilar los posibles puntos de vertido cercano para evitar riesgos y adoptar las medidas de gestión que le requieran las administraciones sanitarias y ambiental.
+ 
+Zonas de baño por provincias
+ 
+En Albacete se controlan seis zonas de baño, cinco corresponden a las lagunas del municipio de Ossa de Montiel (Lagunas de la Colgada, la Salvadora, la Tomilla y las dos de San Pedro), dentro del  Parque de las Lagunas del Ruidera y una en el Río Júcar en el municipio de Alcalá del Júcar.
+ 
+En Ciudad Real se vigilan nueve zonas de baño en total, encontrándose cinco en el Río Bullaque, tres corresponden al municipio de Piedrabuena y dos en el municipio El Robledo; una en el Pantano de Carboneras, en el municipio de Brazatortas y tres zonas de baño en el Parque Natural de Las Lagunas de Ruidera (lagunas del Rey, Entrelagos y la Morenilla).
+ 
+En la provincia de Cuenca se supervisan siete zonas de baño, el Embalse de Buendía, con dos zonas de baño (ambas en Buendía); el Río Guadiela (Albendea); la Laguna del Tobar (Beteta); el Río Escabas (Cañamares); el Embalse de la Toba (Cuenca) y el Río Cuervo (Santa María del Val). 
+ 
+En Guadalajara se agrupan un total de ocho zonas de aguas de baño, dos en el Río Tajo (Trillo y Zaorejas); tres en el Embalse de Entrepeñas (Alocén, Durón y Pareja); una en el Embalse de Alcorlo (La Toba); una en el Embalse de Palmaces de Jadraque y una en el río Tajuña en el municipio de Abánades.
+ 
+La provincia de Toledo cuenta con cinco zonas de baño, tres en las Lagunas de Villafranca de los Caballeros, una en el Embalse de Cazalegas y una en el Río Alberche, en el municipio Escalona.
+</TimeML>
+

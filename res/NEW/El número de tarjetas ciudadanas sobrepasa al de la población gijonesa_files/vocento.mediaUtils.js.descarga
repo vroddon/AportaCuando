@@ -1,0 +1,696 @@
+var Vocento = Vocento || {};
+
+Vocento.MediaUtils = function($, mediaConfig, pageUrl, isDebug){
+		
+    /**
+     * Version del js
+     */
+    var version = '1.0';
+    
+    /**
+     * URL de la pagina actual
+     */
+    var url = (pageUrl) ? pageUrl : document.URL;
+    
+    /**
+     * Medio actual
+     */
+    var site = null;
+    
+    /**
+     * Edicion actual
+     */
+    var edition = null;
+    
+    /**
+     * Modo debug (consola activa)
+     */
+    var debug = (isDebug) ? true : false;
+    
+    /**
+     * Medios validos
+     */
+    var sites = mediaConfig.sites;
+    
+    /**
+     * Establecer el modo debug
+     * @param (boolean) enable
+     */
+    function setDebugMode(enable) {
+        debug = enable;
+        
+        return this;
+    }
+    
+    /**
+     * Obtener el estado del modo debug 
+     */
+    function getDebugMode() {
+        return debug;
+    }
+    
+    /**
+     * Log en la consola 
+     * @param (string) msg
+     */
+    function log(msg) {
+        if(typeof console !== 'undefined' && debug) {
+            console.log(msg);
+        }
+        return this;
+    }
+    
+    function isEmpty(obj){
+        // undefined are "empty"
+        if(typeof obj === 'undefined') return true;
+    	// null are "empty"
+        if(obj == null) return true;
+		// number not "empty"
+		if (typeof obj === 'number') return false;
+		// boolean not "empty"
+		if (typeof obj === 'boolean') return false;
+        // Assume if it has a length property with a non-zero value
+        // that that property is correct.
+        if (obj.length > 0)    return false;
+        if (obj.length === 0)  return true;
+        // Otherwise, does it have any properties of its own?
+        // Note that this doesn't handle
+        // toString and valueOf enumeration bugs in IE < 9
+        for (var key in obj) {
+            if (hasOwnProperty.call(obj, key)) return false;
+        }
+        return true;
+    }
+    /*
+    function isEmpty(obj){
+		var name;
+		for ( name in obj ) {
+			return false;
+		}
+		return true;
+    }
+    */
+    /**
+     * Array de caracteres especiales con sus conversiones
+     */
+    var lDcs = [{'b':'a','l':/[\u00e1\u00e0\u00e2\u00e3\u00e4]/g}
+    			,{'b':'e','l':/[\u00e9\u00e8\u00ea\u00eb]/g}
+    			,{'b':'i','l':/[\u00ed\u00ec\u00ee\u00ef]/g}
+    			,{'b':'o','l':/[\u00f3\u00f2\u00f4\u00f5\u00f6]/g}
+    			,{'b':'u','l':/[\u00fa\u00f9\u00fb\u00fc]/g}
+    			,{'b':'n','l':/[\u00f1]/g}
+    			,{'b':'c','l':/[\u00e7]/g}
+    			,{'b':'-','l':/[\. \-]+/g}
+    			,{'b':'_','l':/[|/_]+/g}
+    			,{'b':'','l':/[^a-z_0-9-]+/g}
+    			,{'b':'-','l':/[\-]+/g}
+    			,{'b':'_','l':/[\-]*_[\-]*/g}];
+    
+    /**
+     * Returns string in a string-url-safe
+     */
+    function normat(str) {
+        str=str.toLowerCase();
+        for (var i=0; i<lDcs.length; i++) {
+            str = str.replace(lDcs[i].l, lDcs[i].b);
+        }
+        return str;
+    }    
+    String.prototype.normat = function() { return normat(this); };
+    
+    /**
+     * Returns (true/false) if str start with prefix
+     */
+    function startsWith(str, prefix) {
+    	//return str.indexOf(prefix) === 0;
+    	return str.substring(0, prefix.length) === prefix;
+    }
+    String.prototype.startsWith = function(prefix) { return startsWith(this, prefix); };
+
+    /**
+     * Returns string with all 'target' replaced with 'replacement'
+     */
+    function replaceAll(str, target, replacement) {
+    	return str.split(target).join(replacement);
+    }
+    String.prototype.replaceAll = function(target, replacement) { return replaceAll(this, target, replacement); };
+    
+    /**
+     * Returns cut string from a original without breaking any words
+     */
+    function cutWithoutBreakingWords(str, maxLength, endString) {
+    	if (str.length > maxLength){
+            str = str.substring(0, maxLength);
+            pos = str.lastIndexOf(" ");
+            if(pos === -1) {
+            	return str.substring(0, maxLength) + endString;
+            }else{
+                return str.substring(0, pos) + endString;
+            }
+        }else{
+            return str;
+        }
+    }
+    String.prototype.cutWithoutBreakingWords = function(maxLength, endString) { return cutWithoutBreakingWords(this, maxLength, endString); };
+    
+    /**
+     * Returns (true/false) if str ends with prefix
+     */
+    function endsWith(str, suffix) {
+    	//return str.match(suffix+'$') === suffix;
+    	return str.substring(str.length - suffix.length, str.length ) === suffix;
+    }
+    String.prototype.endsWith = function(suffix) { return endsWith(this, suffix); };
+    
+    /**
+     * Returns string codificado a UTF-8
+     */
+    function utf8_encode(str) {
+    	if (str === null || typeof str === 'undefined') {
+    		return '';
+    	}
+   	  	var string = (str + ''); // .replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+    	var utftext = '';
+    	var start = 0;
+    	var end = 0;
+    	var stringl = 0;
+   	  	stringl = string.length;
+    	for (var n = 0; n < stringl; n++) {
+    		var c1 = string.charCodeAt(n);
+    	    var enc = null;
+
+    	    if (c1 < 128) {
+    	    	end++;
+    	    } else if (c1 > 127 && c1 < 2048) {
+    	    	enc = String.fromCharCode((c1 >> 6) | 192, (c1 & 63) | 128);
+    	    } else if ((c1 & 0xF800) != 0xD800) {
+    	    	enc = String.fromCharCode((c1 >> 12) | 224, ((c1 >> 6) & 63) | 128, (c1 & 63) | 128);
+    	    } else { // surrogate pairs
+    	    	if ((c1 & 0xFC00) != 0xD800) {
+    	    		throw new RangeError('Unmatched trail surrogate at ' + n);
+    	    	}
+    	    	var c2 = string.charCodeAt(++n);
+    	    	if ((c2 & 0xFC00) != 0xDC00) {
+    	    		throw new RangeError('Unmatched lead surrogate at ' + (n - 1));
+    	    	}
+    	    	c1 = ((c1 & 0x3FF) << 10) + (c2 & 0x3FF) + 0x10000;
+    	    	enc = String.fromCharCode((c1 >> 18) | 240, ((c1 >> 12) & 63) | 128, ((c1 >> 6) & 63) | 128, (c1 & 63) | 128);
+    	    }
+    	    if (enc !== null) {
+    	    	if (end > start) {
+    	    		utftext += string.slice(start, end);
+    	    	}
+    	    	utftext += enc;
+    	    	start = end = n + 1;
+    	    }
+    	}
+   	  	if (end > start) {
+   	  		utftext += string.slice(start, stringl);
+    	}
+   	  	return utftext;
+    }
+    String.prototype.utf8_encode = function() { return utf8_encode(this); };
+
+    /**
+     * Returns string decodificado a UTF-8
+     */
+    function utf8_decode(str) {
+    	var tmp_arr = [];
+    	var i = 0;
+    	var ac = 0;
+    	var c1 = 0;
+    	var c2 = 0;
+    	var c3 = 0;
+    	var c4 = 0;
+   	  	str += '';
+   	  	while (i < str.length) {
+   	  		c1 = str.charCodeAt(i);
+    	    if (c1 <= 191) {
+    	    	tmp_arr[ac++] = String.fromCharCode(c1);
+    	    	i++;
+    	    } else if (c1 <= 223) {
+    	    	c2 = str.charCodeAt(i + 1);
+    	    	tmp_arr[ac++] = String.fromCharCode(((c1 & 31) << 6) | (c2 & 63));
+    	    	i += 2;
+    	    } else if (c1 <= 239) {
+    	    	// http://en.wikipedia.org/wiki/UTF-8#Codepage_layout
+    	    	c2 = str.charCodeAt(i + 1);
+    	    	c3 = str.charCodeAt(i + 2);
+    	    	tmp_arr[ac++] = String.fromCharCode(((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+    	    	i += 3;
+    	    } else {
+    	    	c2 = str.charCodeAt(i + 1);
+    	    	c3 = str.charCodeAt(i + 2);
+    	    	c4 = str.charCodeAt(i + 3);
+    	    	c1 = ((c1 & 7) << 18) | ((c2 & 63) << 12) | ((c3 & 63) << 6) | (c4 & 63);
+    	    	c1 -= 0x10000;
+    	    	tmp_arr[ac++] = String.fromCharCode(0xD800 | ((c1 >> 10) & 0x3FF));
+    	    	tmp_arr[ac++] = String.fromCharCode(0xDC00 | (c1 & 0x3FF));
+    	    	i += 4;
+    	    }
+   	  	}
+   	  	return tmp_arr.join('');
+    }
+    String.prototype.utf8_decode = function() { return utf8_decode(this); };
+
+	/**
+     * Returns array without empty or null elements
+     */
+    function clean(array, value) {
+    	for ( var i = 0, arraylength = array.length ; i < arraylength; i++ ) {
+    	    if ( array[ i ] == value ) {
+    	        array.splice( i, 1 );
+    	        i--;
+    	    }
+    	}
+    	return array;
+    }
+    //Array.prototype.clean = function(value) { return clean(this, value); };
+	
+	/**
+    * Returns the position of the first occurrence of a specified value in a array.
+    * This method returns -1 if the value to search for never occurs.
+     */
+    function arrayIndexOf(array, value/*, from*/) {
+    	var len = array.length >>> 0;
+    	var from = Number(arguments[2]) || 0;
+    	from = (from < 0) ? Math.ceil(from) : Math.floor(from);
+    	if (from < 0)
+    		from += len;
+    	for (; from < len; from++){
+    		if (from in array && array[from] === value){
+    			return from;
+    		}
+        }
+        return -1;
+    }
+    //Array.prototype.arrayIndexOf = function(value) { return arrayIndexOf(this, value); };
+	
+	function getSiteFromUrl(url){
+		var site = '';
+		for(siteKey in sites) {
+			for(urlKey in sites[siteKey]['urls']){
+				if(url.replace(/http:\/\/|www.|-origin|pv.|.srv.vocento.in|\//g,'').indexOf(urlKey) != -1){
+					site = siteKey;
+					break;
+	            }
+			}
+        }
+		return site;
+	}
+	
+	function getUaFromSite(site){
+		var ua = '';
+		for(siteKey in sites) {
+			if(siteKey === site){
+				ua = sites[siteKey]['ua'];
+				break;
+			}
+        }
+		return ua;
+	}
+	
+	function getSiteFromBrightcoveIdAccount(brightcoveIdAccount){
+		var site = '';
+		for(siteKey in sites) {
+			if(sites[siteKey]['brightcove']['idAccount'] === brightcoveIdAccount){
+				site = siteKey;
+				break;
+			}
+		}
+		return site;
+	}
+	
+	function getCharset() {
+		var charset = '';
+		if(typeof document.characterSet === 'undefined'){
+			if(typeof document.charset === 'undefined'){
+			}else{
+				charset = document.charset.toUpperCase();
+			}
+		}else{
+			charset = document.characterSet.toUpperCase();
+		}
+		return charset;
+	}
+	
+	function getLanguage() {
+		var language = 'es';
+		if(document.documentElement.lang !== 'undefined' && document.documentElement.lang !== '')
+			language = document.documentElement.lang.toLowerCase();
+		if(language.length > 2)
+			language = language.substring(0, 2);
+		return language;
+	}
+	
+	function getLocation() {
+		var location = document.location.href;
+		return location;
+	}
+	
+	function getDevice() {
+		var device = 'pc';
+		var useragent = navigator.userAgent.toLowerCase();
+		if(navigator.userAgent.match(/iPhone/i))
+			device = 'iphone';
+		else if((navigator.userAgent.match(/iPad/i)))
+			device = 'ipad';
+		else if((navigator.userAgent.match(/iPod/i)))
+			device = 'ipod';
+		else if((navigator.userAgent.match(/Android/i)))
+			device = 'android';
+		else if((navigator.userAgent.match(/BlackBerry/i)))
+			device = 'blackberry';
+		else if((navigator.userAgent.match(/Opera Mini/i)))
+			device = 'operamini';
+		else if((navigator.userAgent.match(/IEMobile/i)))
+			device = 'iemobile';
+		return device;
+	}
+	
+	function getProtocol() {
+		var protocol = 'http';
+		if(document.location.protocol === 'https:')
+			protocol = 'https';
+		return protocol;
+	}
+	
+	function getGigyaUserType() {
+		gigyaUserType = 'anonimo';
+		if (typeof getUserType !== 'undefined'){
+			gigyaUserType = getUserType();
+		}
+		return gigyaUserType;
+	}
+	
+	function isHomePage(){
+		var isHomePage = false;
+		if(document.location.pathname == '/' || document.location.pathname == '/index.html' || 
+			document.location.pathname == '/alava/' || document.location.pathname == '/alava/index.html' || 
+			document.location.pathname == '/jaen/' || document.location.pathname == '/jaen/index.html' ||
+			document.location.pathname == '/almeria/' || document.location.pathname == '/almeria/index.html' ||
+			document.location.pathname == '/alicante/' || document.location.pathname == '/alicante/index.html'){
+			isHomePage = true;
+		}
+		return isHomePage;
+	}
+	
+	function urlCategories(url){
+		urlCategoriesTmp = [];
+		urlCategories = [];
+		if (url.indexOf('.es/') != -1){
+			url = url.substring(url.indexOf('.es/') + 4, url.lenght);
+		}else if (url.indexOf('.com/') != -1){
+			url = url.substring(url.indexOf('.com/') + 5, url.lenght);
+		}else if (url.indexOf('.in/') != -1){
+			url = url.substring(url.indexOf('.in/') + 4, url.lenght);
+		}else{
+			url = '';
+		}
+		url = url.substring(0, url.lastIndexOf('/'));
+		urlCategoriesTmp = url.split('/');
+		for(var i=0; i<urlCategoriesTmp.length; i++) {
+			var categorie = urlCategoriesTmp[i];
+			if(isNaN(parseFloat(categorie)) && !isFinite(categorie))
+				urlCategories.push(categorie);
+		}
+		urlCategoriesTmp = [];
+		for(var i=0; i<4; i++){
+			categorie = typeof urlCategories[i] == 'undefined' ? '' : urlCategories[i];
+			urlCategoriesTmp.push(categorie);
+		}
+		urlCategories = urlCategoriesTmp;
+		return urlCategories;
+	}
+	
+	function isMovil(){
+		mobile = ['iphone','ipad','ipod','android','blackberry','nokia','opera mini','windows mobile','windows phone','iemobile'];
+		for (var i in mobile){ 
+			if (navigator.userAgent.toLowerCase().indexOf(mobile[i]) > 0){ 
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	function recargarGoogleAnalytics(url){(
+		function(){
+			setTimeout(function(){
+									var googlean1 = url;
+									var s = document.createElement('script');
+									s.type = 'text/javascript';
+									s.src = 'http://www.google-analytics.com/ga.js';
+									s.onload = s.onreadystatechange = function(){
+										if(typeof _gat == 'object'){
+											var init=setInterval(function(){
+																			var uasemilla = '';
+																			var site = getSiteFromUrl(url);
+																			var uasemilla = getUaFromSite(site);
+																			var pageTracker=_gat._getTracker(uasemilla);
+																			pageTracker._trackPageview(googlean1);
+																			clearInterval(init);
+																			},200);
+										}
+									}
+									document.getElementsByTagName('head')[0].appendChild(s);
+								},0);
+		})();
+	}
+	
+	function getOAS_sitepage(sOAS_sitepage) {
+		if(sOAS_sitepage!=''){
+			var respuesta = '';
+			if(sOAS_sitepage.substring(0, 6) == "/4900/") {
+				sOAS_sitepage = sOAS_sitepage.replace(/\/\//g, '\/');
+				respuesta = sOAS_sitepage.substring(6, sOAS_sitepage.length);
+			}else{
+				var campos = sOAS_sitepage.split('/');
+				campos = clean(campos, '');
+				if((campos[0]=="hoycinema") || (campos[0]=="laguiatv")){
+					var periodico = 'hoycinema';}
+				else{			
+					var campos2 = campos[0].split('.');	
+					switch (campos2[1]) {
+						case 'elcomercio-sa':
+							var periodico = 'elcomerciodigital';
+							break;
+						case 'elcomercio':
+							var periodico = 'elcomerciodigital';
+							break;
+						case 'elnortedecastilla':
+							var periodico = 'nortecastilla';
+							break;
+						case 'diario-elcorreo':
+							var periodico = 'elcorreodigital';
+							break;
+						case 'la-verdad':
+							var periodico = 'laverdad';
+							break;
+						case 'lavozdecadiz':
+							var periodico = 'lavozdigital';
+							break;
+						default:
+							var periodico = campos2[1];
+							break;   
+					}
+				}
+				var separador = '/';	
+				respuesta = 'vocento.' + periodico;
+				var cont = 1;
+				while(campos[cont] != null){
+					respuesta += separador + campos[cont];
+					cont++;               
+				}
+			}
+			return respuesta;
+		}else{
+	        return '';
+	    }
+	}
+	
+	function useragentMatch(useragent){
+		useragent = useragent.toLowerCase();
+	    var match = /(chrome)[ \/]([\w.]+)/.exec(useragent) ||
+	        /(webkit)[ \/]([\w.]+)/.exec(useragent) ||
+	        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(useragent) ||
+	        /(msie) ([\w.]+)/.exec(useragent) ||
+	        useragent.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(useragent) ||
+	        [];
+	    return {
+	        browser: match[ 1 ] || "",
+	        version: match[ 2 ] || "0"
+	    }
+	}
+	
+	function getBrowser(){
+		var matched, browser;
+		matched = useragentMatch(navigator.userAgent);
+		browser = {};
+		if (matched.browser){
+		    browser[matched.browser] = true;
+		    browser.version = matched.version;
+		}
+		// Chrome is Webkit, but Webkit is also Safari.
+		if(browser.chrome){
+		    browser.webkit = true;
+		}else if( browser.webkit){
+		    browser.safari = true;
+		}
+		return browser;
+	}
+	
+	function getUrlPlayer(mediaType, options){
+		urlPlayer = '';
+		urlBase = mediaConfig.sites[options.site]['media-url'][mediaType];
+		if(url.indexOf('videochat')!=-1){
+			urlBase = mediaConfig.sites[options.site]['media-url']['videochat'];
+		}
+		urlParams = ''; 
+		for(key in options){
+			if(!mediaUtils.isEmpty(options[key])){
+				options[key] = options[key].toString().replaceAll('&quot;', '"');
+				if(mediaConfig.sites[options.site]['media-url'][mediaType].toLowerCase().indexOf('modgen') != -1){
+					urlParams += key + '=' + escape(options[key]) + '&';
+				}else{
+					urlParams += key + '=' + encodeURIComponent(options[key]) + '&';
+				}
+			}
+		}
+		urlParams = urlParams.replace(/'/g, '%27');
+		urlPlayer = urlBase + '?' + urlParams.substring(0, urlParams.length-1);		
+		return urlPlayer;
+	}
+	
+	function previewPlayer(urlPlayer, options){
+		var jQueryIdDiv = options.template === '' ? 'body' : '#' + options.idDiv.replace(/[.]/gi,'\\\.');
+				
+		if (getBrowser().msie && window.XDomainRequest) {
+			//INTERNET EXPLORER
+			var xdr = new XDomainRequest();
+			xdr.withCredentials = true;
+			xdr.open("get", urlPlayer);
+			xdr.onload = function() {
+									var dom = new ActiveXObject("Microsoft.XMLDOM");
+									dom.async = false;
+									var data = xdr.responseText;
+									$(jQueryIdDiv).html(data);
+	        						};
+	        xdr.send();
+		}else{
+			//NO INTERNET EXPLORER
+			$.ajax({
+					xhrFields: {
+								withCredentials: true
+								},
+					url: urlPlayer,
+					success: function(data) {
+											$(jQueryIdDiv).html(data);
+											},
+					error: function(XMLHttpRequest, textStatus, errorThrown){}
+					});
+		}
+	}
+	
+	function viewPlayer(urlPlayer, options){
+		var jQueryIdDiv = options.template === '' ? 'body' : '#' + options.idDiv.replace(/[.]/gi,'\\\.');
+		
+		if(options.modalLayer === 'true'){
+			//CAPA MODAL
+			if (getBrowser().msie && window.XDomainRequest) {
+				//INTERNET EXPLORER
+				var xdr = new XDomainRequest();
+				xdr.withCredentials = true;
+				xdr.open("get", urlPlayer);
+				xdr.onload = function() {
+										var dom = new ActiveXObject("Microsoft.XMLDOM");
+										dom.async = false;
+										var data = xdr.responseText;
+										$('body').append(data);
+				};
+				xdr.send();
+			}else{
+				//NO INTERNET EXPLORER
+				$.ajax({
+						xhrFields: {
+									withCredentials: true
+									},
+						url: urlPlayer,
+						success: function(data) {
+												if($('#myModal_'+options.idDiv).length >0){
+													$('#myModal_'+options.idDiv).remove();
+												}
+												$('body').append(data);
+												},
+						error: function(XMLHttpRequest, textStatus, errorThrown){}
+				});
+			}
+		}else{
+			//NO CAPA MODAL
+			if (getBrowser().msie && window.XDomainRequest) {
+				//INTERNET EXPLORER
+				var xdr = new XDomainRequest();
+				xdr.withCredentials = true;
+				xdr.open("get", urlPlayer);
+				xdr.onload = function() {
+										var dom = new ActiveXObject("Microsoft.XMLDOM");
+										dom.async = false;
+										var data = xdr.responseText;
+										$(jQueryIdDiv).html(data);
+				};
+				xdr.send();
+			}else{
+				//NO INTERNET EXPLORER
+				$.ajax({
+						xhrFields: {
+									withCredentials: true
+									},
+						url: urlPlayer,
+						success: function(data) {
+												$(jQueryIdDiv).html(data);
+												},
+						error: function(XMLHttpRequest, textStatus, errorThrown){}
+				});
+			}
+		}
+	}
+	
+	/**
+	 * Metodos publicos
+	 */
+	return {
+	    version: function() {
+	        return version;
+	    }
+    	,setDebugMode : setDebugMode
+    	,getDebugMode : getDebugMode
+    	,log : log
+    	,isEmpty : isEmpty
+    	,normat : normat
+    	,startsWith : startsWith
+    	,endsWith : endsWith
+    	,replaceAll : replaceAll
+    	,utf8_encode : utf8_encode
+    	,utf8_decode : utf8_decode
+    	,clean : clean
+    	,arrayIndexOf : arrayIndexOf
+    	,cutWithoutBreakingWords: cutWithoutBreakingWords
+    	,getSiteFromUrl : getSiteFromUrl
+    	,getUaFromSite : getUaFromSite
+    	,getSiteFromBrightcoveIdAccount : getSiteFromBrightcoveIdAccount
+    	,getCharset : getCharset
+    	,getLanguage : getLanguage
+    	,getLocation : getLocation
+    	,getDevice : getDevice
+    	,getProtocol : getProtocol
+    	,getGigyaUserType : getGigyaUserType
+    	,isHomePage : isHomePage
+    	,urlCategories : urlCategories
+    	,isMovil : isMovil
+    	,recargarGoogleAnalytics : recargarGoogleAnalytics
+    	,getOAS_sitepage : getOAS_sitepage
+    	,getBrowser : getBrowser
+    	,getUrlPlayer : getUrlPlayer
+    	,previewPlayer : previewPlayer
+    	,viewPlayer : viewPlayer
+	};
+};

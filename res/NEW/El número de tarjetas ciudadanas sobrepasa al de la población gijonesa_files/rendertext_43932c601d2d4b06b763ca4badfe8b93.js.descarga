@@ -1,0 +1,27 @@
+function callBackazul() {
+  var texAdLinkStyle = "display:block;font-weight:bold;color: rgb(0,81,154);font-size:10pt;line-height:normal;text-decoration:underline;background-color:transparent;padding:0px;margin:0px;font-style:normal;font-family:arial,helvetica,sans-serif;text-align:left;";
+  var texAdTitleStyle = "display:block;font-weight:bold;color:black;font-size:14px;line-height:normal;text-decoration:none;background-color:transparent;padding:0px;margin:0px;font-style:normal;font-family:arial,sans-serif;text-align:right;";
+  var texAdDescriptionStyle = "display:block;font-weight:bold;color: rgb(0,81,154);font-size:10pt;line-height:normal;text-decoration:underline;background-color:transparent;padding:0px;margin:0px;font-style:normal;font-family:arial,helvetica,sans-serif;text-align:left;";
+  var texAdUrlStyle = "display:block;font-weight:normal;white-space:nowrap;text-decoration:underline;font-size:11px;line-height:normal;color:#blue;background-color:transparent;padding:0px;margin:0px;font-style:normal;font-family:arial,sans-serif;text-align:right;";
+  var startIndex=arguments.length==4?1:0;
+  var ads=arguments[startIndex];
+  var width=arguments[startIndex+1];
+  var height=arguments[startIndex+2];
+  var str = "<div style='width:575px;height:14px;border:0px;'>";
+  for(var i=0; i<ads.length; i++) {
+    str += "<div class='hover'><table style='width:100%; padding:2px;'><tbody><tr>";
+	// str += "<td style='min-width:220px;'><a href='" + ads[i].ct + "' target='_blank' style='" + texAdLinkStyle + "'>";
+	// str += "<span style='" + texAdTitleStyle + "'>"+ ads[i].title.reverse() + "</span>";
+	str += "<td style='min-width:570px;'><a href='" + ads[i].ct + "' target='_blank' style='" + texAdLinkStyle + "'><span style='" + texAdDescriptionStyle + "'>" + ads[i].text1 + "</span>";
+	// str += "<span style='" + texAdUrlStyle + "'>"+ ads[i].url.reverse() + "</span>";
+	// str += "<td style='padding-left:5px;'><a href='" + ads[i].ct + "' target='_blank'><img src='" + ads[i].imageUrl + "' /></a></td>";
+	str += "</a></td>";
+	str += "</tr></tbody></table></div>";
+  }
+  str+= "</div>";
+  if(startIndex==0)
+    document.write(str)
+  else
+    arguments[0].innerHTML = str;
+  return true;
+}

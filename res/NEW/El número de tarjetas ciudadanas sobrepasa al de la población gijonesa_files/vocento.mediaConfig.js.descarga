@@ -1,0 +1,955 @@
+var Vocento = Vocento || {};
+
+Vocento.MediaConfig = {
+	/**
+	* Configuracion de los medios
+	*/
+	'sites': {
+		//ABC
+		'abc': {
+			'name' : 'Abc'
+			,'domain' : 'http://www.abc.es'
+			,'editions' : {
+						}
+			,'ua' : 'UA-6773806-15'
+			,'urls' : {
+						'abc.es' : 'Abc'
+					}
+			,'media-url' : {
+						//'video' : 'http://modulos-mm.abc.es/includes/manuales/videos/php/proxyModgen.php'
+						'video' : 'http://media.abc.es/v2/video/data'
+						,'videolive' : ''
+						,'gallery' : ''
+						,'graph' : ''
+						,'audio' : 'http://media.abc.es/v2/audio/data'
+						,'videochat' : 'http://media.abc.es/v2/video/data'
+							}
+			,'template-default-player' : {
+											'video' : 'ABC_playerVideo'
+											,'videolive' : ''
+											,'gallery' : 'abc/ABC_itemGaleriaFullscreen'
+											,'graph' : ''
+											,'audio' : 'abc/ABC_itemAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '55814260001'
+								,'idPlayerFlash' : '86420195001'
+								,'idPlayerHtml5' : 'rkDAq3Wf'
+							}
+		}
+		,'sevilla.abc': {
+			'name' : 'Abc de Sevilla'
+			,'domain' : 'http://sevilla.abc.es'
+			,'editions' : {
+						}
+			,'ua' : 'UA-6773806-16'
+			,'urls' : {
+						'sevilla.abc.es' : 'Abc de Sevilla'
+					}
+			,'media-url' : {
+						//'video' : 'http://modulos-mm.sevilla.abc.es/includes/manuales/videos/php/proxyModgen.php'
+						'video' : 'http://media.sevilla.abc.es/v2/video/data'
+						,'videolive' : ''
+						,'gallery' : ''
+						,'graph' : ''
+						,'audio' : 'http://media.sevilla.abc.es/v2/audio/data'
+						,'videochat' : 'http://media.sevilla.abc.es/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'ABC_playerVideo'
+											,'videolive' : ''
+											,'gallery' : 'abc/ABC_itemGaleriaFullscreen'
+											,'graph' : ''
+											,'audio' : 'abc/ABC_itemAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '78536835001'
+								,'idPlayerFlash' : '89109300001'
+								,'idPlayerHtml5' : 'SJnknyhN'
+							}
+		}
+		,'lavozdigital': {
+			'name' : 'La Voz de C&aacute;diz'
+			,'domain' : 'http://www.lavozdigital.es'
+			,'editions' : {
+						}
+			,'ua' : 'UA-3047322-48'
+			,'urls' : {
+						'lavozdigital.es' : 'La Voz de C&aacute;diz'
+					}
+			,'media-url' : {
+						//'video' : 'http://modulos-mm.lavozdigital.es/includes/manuales/videos/php/proxyModgen.php'
+						'video' : 'http://media.lavozdigital.es/v2/video/data'
+						,'videolive' : ''
+						,'gallery' : ''
+						,'graph' : ''
+						,'audio' : 'http://media.lavozdigital.es/v2/audio/data'
+						,'videochat' : 'http://media.lavozdigital.es/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'ABC_playerVideo'
+											,'videolive' : ''
+											,'gallery' : 'abc/ABC_itemGaleriaFullscreen'
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '86847173001'
+								,'idPlayerFlash' : '292326712001'
+								,'idPlayerHtml5' : 'SJ8WIe2N'
+							}
+		}
+		,'hoycinema.abc': {
+			'name' : 'Hoy Cinema'
+			,'domain' : 'http://hoycinema.abc.es'
+			,'editions' : {
+						}
+			,'ua' : 'UA-27015427-1'
+			,'urls' : {
+						'hoycinema.abc.es' : 'Hoy Cinema'
+					}
+			,'media-url' : {
+						//'video' : 'http://modulos-mm.abc.es/includes/manuales/videos/php/proxyModgen.php'
+						'video' : 'http://media.hoycinema.abc.es/v2/video/data'
+						,'videolive' : ''
+						,'gallery' : ''
+						,'graph' : ''
+						,'audio' : ''
+						,'videochat' : ''
+						}
+			,'template-default-player' : {
+											'video' : 'ABC_playerVideoHoyCinema'
+											,'videolive' : ''
+											,'gallery' : ''
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '802565294001'
+								,'idPlayerFlash' : '802565613001'
+								,'idPlayerHtml5' : 'BJDHsUmkl'
+							}
+		}
+		,'laguiatv.abc': {
+			'name' : 'La Gu&iacute;a TV'
+			,'domain' : 'http://laguiatv.abc.es'
+			,'editions' : {
+						}
+			,'ua' : 'UA-27015427-1'
+			,'urls' : {
+						'laguiatv.abc.es' : 'La Gu&iacute;a TV'
+					}
+			,'media-url' : {
+						//'video' : 'http://modulos-mm.abc.es/includes/manuales/videos/php/proxyModgen.php'
+						'video' : 'http://media.laguiatv.abc.es/v2/video/data'
+						,'videolive' : ''
+						,'gallery' : ''
+						,'graph' : ''
+						,'audio' : ''
+						,'videochat' : ''
+						}
+			,'template-default-player' : {
+											'video' : 'ABC_playerVideoHoyCinema'
+											,'videolive' : ''
+											,'gallery' : ''
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '802565294001'
+								,'idPlayerFlash' : '802565613001'
+								,'idPlayerHtml5' : 'BJDHsUmkl'
+							}
+		}
+		//PPLL
+		,'diariosur': {
+			'name' : 'Diario Sur'
+			,'domain' : 'http://www.diariosur.es'
+			,'editions' : {
+						}
+			,'ua' : 'UA-3128303-38'
+			,'urls' : {
+						'diariosur.es' : 'Diario Sur'
+						,'malagacf.diariosur.es' : 'M&aacute;laga CF'
+						,'malagaenlamesa.com' : 'M&aacute;laga en la mesa'
+						,'unicaja.diariosur.es' : 'Unicaja'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.diariosur.es/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.diariosur.es/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '85688293001'
+								,'idPlayerFlash' : '309045659001'
+								,'idPlayerHtml5' : 'Hy3CiApO'
+							}
+		}
+		,'diariovasco': {
+			'name' : 'Diario Vasco'
+			,'domain' : 'http://www.diariovasco.com'
+			,'editions' : {
+						}
+			,'ua' : 'UA-59232-28'
+			,'urls' : {
+						'diariovasco.com' : 'Diario Vasco'
+						,'clasica-san-sebastian.diariovasco.com' : 'Cl&aacute;sica San Sebasti&aacute;n'
+						,'real-sociedad.diariovasco.com' : 'Real Sociedad'
+						,'sdeibar.diariovasco.com' : 'S.D. Eibar'
+						,'tamborrada.diariovasco.com' : 'Tamborrada'
+						,'www.teledonosti.tv' : 'Teledonosti'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.diariovasco.com/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.diariovasco.com/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '85688294001'
+								,'idPlayerFlash' : '292369646001'
+								,'idPlayerHtml5' : 'r1idvaZF'
+							}
+		}
+		,'elcomercio': {
+			'name' : 'El Comercio'
+			,'domain' : 'http://www.elcomercio.es'
+			,'editions' : {
+						}
+			,'ua' : 'UA-3458093-6'
+			,'urls' : {
+						'elcomercio.es' : 'El Comercio'
+						,'realaviles.elcomercio.es' : 'Real Avil&eacute;s'
+						,'realoviedo.elcomercio.es' : 'Real Oviedo'
+						,'sporting.elcomercio.es' : 'Sporting'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.elcomercio.es/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.elcomercio.es/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '85707284001'
+								,'idPlayerFlash' : '308992247001'
+								,'idPlayerHtml5' : 'S18B9hHY'
+							}
+		}
+		,'elcorreo': {
+			'name' : 'El Correo'
+			,'domain' : 'http://www.elcorreo.com'
+			,'editions' : {
+							'bizkaia' : 'Bizkaia'
+							,'alava' : 'Araba/&Aacute;lava'
+						}
+			,'ua' : 'UA-7212485-34'
+			,'urls' : {
+						'elcorreo.com' : 'El correo'
+						,'alaves.elcorreo.com' : 'Alav&eacute;'
+						,'athletic.elcorreo.com' : 'Athletic'
+						,'baskonia.elcorreo.com' : 'Baskonia'
+						,'bilbaobasket.elcorreo.com' : 'Bilbao Basket'
+						,'mirandes.elcorreo.com' : 'Mirand&eacute;s'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.elcorreo.com/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.elcorreo.com/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '85688292001'
+								,'idPlayerFlash' : '309018193001'
+								,'idPlayerHtml5' : 'BJBcPTBY'
+							}
+		}
+		,'eldiariomontanes': {
+			'name' : 'El Diario Monta&ntilde;&eacute;s'
+			,'domain' : 'http://www.eldiariomontanes.es'
+			,'editions' : {
+						}
+			,'ua' : 'UA-7123523-58'
+			,'urls' : {
+						'eldiariomontanes.es' : 'El Diario Monta&ntilde;&eacute;s'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.eldiariomontanes.es/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.eldiariomontanes.es/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '85707285001'
+								,'idPlayerFlash' : '308992240001'
+								,'idPlayerHtml5' : 'ryeOOoCSF'
+							}
+		}
+		,'elnortedecastilla': {
+			'name' : 'El Norte de Castilla'
+			,'domain' : 'http://www.elnortedecastilla.es'
+			,'editions' : {
+						}
+			,'ua' : 'UA-5509324-22'
+			,'urls' : {
+						'elnortedecastilla.es' : 'El Norte de Castilla'
+						,'realvalladolid.elnortedecastilla.es' : 'Real Valladolid'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.elnortedecastilla.es/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.elnortedecastilla.es/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '86746486001'
+								,'idPlayerFlash' : '292158289001'
+								,'idPlayerHtml5' : 'r1LlMlUF'
+							}
+		}
+		,'hoy': {
+			'name' : 'Hoy'
+			,'domain' : 'http://www.hoy.es'
+			,'editions' : {
+						}
+			,'ua' : 'UA-7648528-6'
+			,'urls' : {
+						'hoy.es' : 'Hoy'
+						,'master.hoy.es' : 'Master'
+						,'versiona.hoy.es' : 'Versiona'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.hoy.es/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.hoy.es/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '85688295001'
+								,'idPlayerFlash' : '309010012001'
+								,'idPlayerHtml5' : 'ByeSmbWDK'
+							}
+		}
+		,'ideal': {
+			'name' : 'Ideal'
+			,'domain' : 'http://www.ideal.es'
+			,'editions' : {
+							'granada' : 'Granada'
+							,'jaen' : 'Ja&eacute;n'
+							,'almeria' : 'Almer&iacute;a'
+						}
+			,'ua' : 'UA-4272508-45'
+			,'urls' : {
+						'ideal.es' : 'Ideal'
+						,'granadacf.ideal.es' : 'Granada CF'
+						,'realjaen.ideal.es' : 'Real Ja&eacute;n'
+						,'udalmeria.ideal.es' : 'UD Almer&iacute;a'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.ideal.es/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.ideal.es/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '86746483001'
+								,'idPlayerFlash' : '309010008001'
+								,'idPlayerHtml5' : 'r17yWIwK'
+							}
+		}
+		,'larioja': {
+			'name' : 'La Rioja'
+			,'domain' : 'http://www.larioja.com'
+			,'editions' : {
+		 				}
+			,'ua' : 'UA-7124171-9'
+			,'urls' : {
+						'larioja.com' : 'La Rioja'
+						,'lomejordelvinoderioja.com' : 'Lo Mejor Del Vino De Rioja'
+						,'thebestofriojawine.com' : 'The Best Of Rioja Wine'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.larioja.com/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.larioja.com/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '86746484001'
+								,'idPlayerFlash' : '309010007001'
+								,'idPlayerHtml5' : 'BkJWl8OY'
+							}
+		}
+		,'lasprovincias': {
+			'name' : 'Las Provincias'
+			,'domain' : 'http://www.lasprovincias.es'
+			,'editions' : {
+						}
+			,'ua' : 'UA-7008806-11'
+			,'urls' : {
+						'lasprovincias.es' : 'Las Provincias'
+						,'cosaspracticas.lasprovincias.es' : 'Cosas Pr&aacute;cticas'
+						,'elchecf.lasprovincias.es' : 'Elche CF'
+						,'www.fallasvalencia.es' : 'Fallas'
+						,'herculescf.lasprovincias.es' : 'Hercules CF'
+						,'levanteud.lasprovincias.es' : 'Levante UD'
+						,'valenciacf.lasprovincias.es' : 'Valencia CF'
+						,'villarrealcf.lasprovincias.es' : 'Villarreal CF' 
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.lasprovincias.es/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.lasprovincias.es/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '86746485001'
+								,'idPlayerFlash' : '308992236001'
+								,'idPlayerHtml5' : 'H1Gpd78OF'
+							}
+		}
+		,'laverdad': {
+			'name' : 'La Verdad'
+			,'domain' : 'http://www.laverdad.es'
+			,'editions' : {
+							'murcia': 'Murcia'
+							,'alicante': 'Alicante'
+						}
+			,'ua' : 'UA-6052672-22'
+			,'urls' : {
+						'laverdad.es' : 'La Verdad'
+						,'elchecf.laverdad.es' : 'Elche CF'
+						,'fccartagena.laverdad.es' : 'FC Cartagena'
+						,'herculescf.laverdad.es' : 'Hercules CF'
+						,'realmurcia.laverdad.es' : 'Real Murcia'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.laverdad.es/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.laverdad.es/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '85707286001'
+								,'idPlayerFlash' : '292369619001'
+								,'idPlayerHtml5' : 'Byg2b68dK'
+							}
+		}
+		,'leonoticias': {
+			'name' : 'Leonoticias'
+			,'domain' : 'http://www.leonoticias.com'
+			,'editions' : {
+		 				}
+			,'ua' : 'UA-7124171-9'
+			,'urls' : {
+						'leonoticias.com' : 'Leonoticias'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.leonoticias.com/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.leonoticias.com/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '86746486001'
+								,'idPlayerFlash' : '292158289001'
+								,'idPlayerHtml5' : 'r1LlMlUF'
+							}
+		}
+		,'surinenglish': {
+			'name' : 'Surinenglish'
+			,'domain' : 'http://www.surinenglish.com'
+			,'editions' : {
+		 				}
+			,'ua' : 'UA-3128303-55'
+			,'urls' : {
+						'surinenglish.com' : 'Surinenglish'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'http://media.surinenglish.com/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'http://media.surinenglish.com/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '85688293001'
+								,'idPlayerFlash' : '309045659001'
+								,'idPlayerHtml5' : 'Hy3CiApO'
+							}
+		}
+		//PPVV
+		,'autocasion': {
+			'name' : 'Autocasion'
+			,'domain' : 'http://www.autocasion.com'
+			,'editions' : {
+						}
+			,'ua' : 'UA-431099-13'
+			,'urls' : {
+						'autocasion.com' : 'Autocasion'
+					}
+			,'media-url' : {
+						'video' : 'http://modulos-mm.autocasion.com/includes/manuales/videos/php/proxyModgen.php'
+						,'videolive' : ''
+						,'gallery' : ''
+						,'graph' : ''
+						,'audio' : ''
+						,'videochat' : ''
+						}
+			,'template-default-player' : {
+											'video' : ''
+											,'videolive' : ''
+											,'gallery' : ''
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '800000603001'
+								,'idPlayerFlash' : '1030965820001'
+								,'idPlayerHtml5' : 'HyXEoyMK'
+							}
+		}
+		,'colpisa': {
+			'name' : 'Colpisa'
+			,'domain' : 'http://www.colpisa.com'
+			,'editions' : {
+						}
+			,'ua' : ''
+			,'urls' : {
+						'colpisa.com' : 'Colpisa'
+					}
+			,'media-url' : {
+							//'video' : 'http://modulos-mm.colpisa.com/includes/manuales/videos/php/proxyModgen.php'
+							'video' : 'http://media.colpisa.com/v2/video/data'
+							,'videolive' : ''
+							,'gallery' : ''
+							,'graph' : ''
+							,'audio' : ''
+							,'videochat' : ''
+							}
+			,'template-default-player' : {
+											'video' : 'colpisa/VOC_playerColpisa'
+											,'videolive' : ''
+											,'gallery' : ''
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '78527750001'
+								,'idPlayerFlash' : '2176472552001'
+								,'idPlayerHtml5' : 'B16FmVF0'
+							}
+		}
+		,'eslang': {
+			'name' : 'Eslang'
+			,'domain' : 'http://www.eslang.es'
+			,'editions' : {
+						}
+			,'ua' : ''
+			,'urls' : {
+						'eslang.es' : 'Eslang'
+					}
+			,'media-url' : {
+						'video' : 'http://media.eslang.es/v2/video/data'
+						,'videolive' : ''
+						,'gallery' : ''
+						,'graph' : ''
+						,'audio' : ''
+						,'videochat' : ''
+						}
+			,'template-default-player' : {
+											'video' : ''
+											,'videolive' : ''
+											,'gallery' : ''
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '4607804116001'
+								,'idPlayerFlash' : '4642197998001'
+								,'idPlayerHtml5' : 'HkAuWXY'
+							}
+		}
+		,'finanzas': {
+			'name' : 'Finanzas'
+			,'domain' : 'http://www.finanzas.com'
+			,'editions' : {
+						}
+			,'ua' : 'UA-4530329-1'
+			,'urls' : {
+						'finanzas.com' : 'Finanzas'
+					}
+			,'media-url' : {
+						//'video' : 'http://modulos-mm.finanzas.com/includes/manuales/videos/php/proxyModgen.php'
+						'video' : 'http://media.finanzas.com/v2/video/data'
+						,'videolive' : ''
+						,'gallery' : ''
+						,'graph' : ''
+						,'audio' : ''
+						,'videochat' : ''
+						}
+			,'template-default-player' : {
+											'video' : 'VOC_playerFinanzas'
+											,'videolive' : ''
+											,'gallery' : ''
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '818971954001'
+								,'idPlayerFlash' : '819992611001'
+								,'idPlayerHtml5' : 'HJMPkXFR'
+							}
+		}
+		,'guapabox': {
+			'name' : 'Guapabox'
+			,'domain' : 'http://www.guapabox.com'
+			,'editions' : {
+		 				}
+			,'ua' : 'UA-1724369-3'
+			,'urls' : {
+						'guapabox.com' : 'Guapabox'
+					}
+			,'media-url' : {
+						//'video' : '/modgen/'
+						'video' : 'https://media.guapabox.com/v2/video/data'
+						,'videolive' : '/modgen/'
+						,'gallery' : '/modgen/'
+						,'graph' : '/modgen/'
+						,'audio' : '/modgen/'
+						,'videochat' : 'https://media.guapabox.com/v2/video/data'
+						}
+			,'template-default-player' : {
+											'video' : 'rediseno2014/PPLL_playerVideo'
+											,'videolive' : 'rediseno2014/PPLL_playerDirecto'
+											,'gallery' : 'rediseno2014/PPLL_playerGaleria'
+											,'graph' : 'rediseno2014/PPLL_playerGrafico'
+											,'audio' : 'rediseno2014/PPLL_playerAudio'
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '207397166001'
+								,'idPlayerFlash' : '2505481441001'
+								,'idPlayerHtml5' : 'default'
+							}
+		}
+		,'mujerhoy': {
+			'name' : 'Mujer Hoy'
+			,'domain' : 'http://www.mujerhoy.com'
+			,'editions' : {
+						}
+			,'ua' : 'UA-1724369-3'
+			,'urls' : {
+						'mujerhoy.com' : 'Mujer Hoy'
+					}
+			,'media-url' : {
+							//'video' : 'http://modulos-mm.mujerhoy.com/includes/manuales/videos/php/proxyModgen.php'
+							'video' : 'http://media.mujerhoy.com/v2/video/data'
+							,'videolive' : ''
+							,'gallery' : ''
+							,'graph' : ''
+							,'audio' : ''
+							,'videochat' : ''
+							}
+			,'template-default-player' : {
+											'video' : 'VOC_playerHoyMujer'
+											,'videolive' : ''
+											,'gallery' : ''
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '207397166001'
+								,'idPlayerFlash' : '292168664001'
+								,'idPlayerHtml5' : 'SyBIr2XA'
+							}
+		}
+		,'pisos': {
+			'name' : 'Pisos'
+			,'domain' : 'http://www.pisos.com'
+			,'editions' : {
+						}
+			,'ua' : 'UA-2057447-23'
+			,'urls' : {
+						'pisos.com' : 'Pisos'
+					}
+			,'media-url' : {
+							//'video' : 'http://modulos-mm.pisos.com/includes/manuales/videos/php/proxyModgen.php'
+							'video' : 'http://media.pisos.com/v2/video/data'
+							,'videolive' : ''
+							,'gallery' : ''
+							,'graph' : ''
+							,'audio' : ''
+							,'videochat' : ''
+							}
+			,'template-default-player' : {
+											'video' : ''
+											,'videolive' : ''
+											,'gallery' : ''
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '90843144001'
+								,'idPlayerFlash' : '90775816001'
+								,'idPlayerHtml5' : 'default'
+							}
+		}
+		,'vcfplay': {
+			'name' : 'Vcfplay'
+			,'domain' : 'http://www.vcfplay.com'
+			,'editions' : {
+						}
+			,'ua' : 'UA-28645351-1'
+			,'urls' : {
+						'vcfplay.com' : 'Vcfplay'
+					}
+			,'media-url' : {
+							//'video' : 'http://modulos-mm.vcfplay.com/includes/manuales/videos/php/proxyModgen.php'
+							'video' : 'http://media.vcfplay.com/v2/video/data'
+							,'videolive' : ''
+							,'gallery' : ''
+							,'graph' : ''
+							,'audio' : ''
+							,'videochat' : ''
+							}
+			,'template-default-player' : {
+											'video' : 'LPR_playerValenciaFC'
+											,'videolive' : ''
+											,'gallery' : ''
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '1441355411001'
+								,'idPlayerFlash' : '1469978239001'
+								,'idPlayerHtml5' : 'SJdbemq'
+							}
+		}
+		,'vocento': {
+			'name' : 'Vocento'
+			,'domain' : 'http://www.vocento.com'
+			,'editions' : {
+						}
+			,'ua' : 'UA-11317814-1'
+			,'urls' : {
+						'vocento.com' : 'Vocento'
+					}
+			,'media-url' : {
+							//'video' : 'http://modulos-mm.vcfplay.com/includes/manuales/videos/php/proxyModgen.php'
+							'video' : 'http://media.vocento.com/v2/video/data'
+							,'videolive' : ''
+							,'gallery' : ''
+							,'graph' : ''
+							,'audio' : ''
+							,'videochat' : ''
+							}
+			,'template-default-player' : {
+											'video' : 'LPR_playerValenciaFC'
+											,'videolive' : ''
+											,'gallery' : ''
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '72312214001'
+								,'idPlayerFlash' : '600462840001'
+								,'idPlayerHtml5' : 'default'
+							}
+		}
+		,'xlsemanal': {
+			'name' : 'XLSemanal'
+			,'domain' : 'http://www.xlsemanal.com'
+			,'editions' : {
+						}
+			,'ua' : 'UA-81205716-1'
+			,'urls' : {
+						'xlsemanal.com' : 'XLSemanal'
+					}
+			,'media-url' : {
+							//'video' : 'http://modulos-mm.vcfplay.com/includes/manuales/videos/php/proxyModgen.php'
+							'video' : 'http://media.xlsemanal.com/v2/video/data'
+							,'videolive' : ''
+							,'gallery' : ''
+							,'graph' : ''
+							,'audio' : ''
+							,'videochat' : ''
+							}
+			,'template-default-player' : {
+											'video' : ''
+											,'videolive' : ''
+											,'gallery' : ''
+											,'graph' : ''
+											,'audio' : ''
+											,'videochat' : ''
+										}
+			,'brightcove' : {
+								'idAccount' : '5176256123001'
+								,'idPlayerFlash' : '5177771496001'
+								,'idPlayerHtml5' : 'HJVnPAOgl'
+							}
+		}
+	}
+	,'url': {
+		'video' : 'http://modulos-mm.abc.es/includes/manuales/videos/php/proxyModgen.php'
+		,'gallery' : 'http://modulos-mm.abc.es/includes/manuales/videos/php/proxyModgen.php'
+		,'graph' : 'http://modulos-mm.abc.es/includes/manuales/videos/php/proxyModgen.php'
+		,'audio' : 'http://modulos-mm.abc.es/includes/manuales/videos/php/proxyModgen.php'
+		,'videochat' : 'http://modulos-mm.abc.es/includes/manuales/videos/php/proxyModgen.php'
+	}
+};

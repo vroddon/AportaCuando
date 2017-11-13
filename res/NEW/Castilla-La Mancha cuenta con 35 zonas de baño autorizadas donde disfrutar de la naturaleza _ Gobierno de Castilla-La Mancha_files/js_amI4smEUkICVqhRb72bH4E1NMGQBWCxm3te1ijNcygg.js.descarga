@@ -1,0 +1,32 @@
+/*
+*	Accesibilildad Menu Perfiles
+*/
+jQuery(document).ready(function(){
+	jQuery("#region-cabecera-tercera li.expanded").each(function(i){
+		var clave = parseInt(i+1); //calculo en que menu estamos	
+		//----------------------ONFOCUS--NAV-TECLADO-------------------//		
+    	//Menu FOCUS IN pone estilo focusPadre
+			jQuery(this).focusin(function() {
+				jQuery("#region-cabecera-tercera ul.menuPrincipal li.expanded:nth-child("+clave+")").addClass("focusPadre");
+				jQuery("#region-cabecera-tercera ul.menuPrincipal li.expanded:nth-child("+clave+") ul").addClass("ulExpand");	
+			});
+			//Submenu FOCUS IN despliega
+			jQuery("#region-cabecera-tercera ul.menuPrincipal li.expanded:nth-child("+clave+") ul li").focusin(function() {								
+				/*jQuery("#region-cabecera-tercera ul.menuPrincipal li.expanded:nth-child("+clave+")").addClass("focusPadre");
+				jQuery("#region-cabecera-tercera ul.menuPrincipal li.expanded:nth-child("+clave+") ul:first-child").addClass("ulExpand");*/
+	  	});
+			//onFocus-Out  en li del submenu, cuando acaba de leer un submenu cierra panel
+			jQuery("#region-cabecera-tercera ul.menuPrincipal li.expanded:nth-child("+clave+") ul li:last-child").focusout(function(){
+				jQuery("#region-cabecera-tercera ul.menuPrincipal li.expanded:nth-child("+clave+")").removeClass("focusPadre");																																																															
+	  		jQuery("#region-cabecera-tercera ul.menuPrincipal li.expanded:nth-child("+clave+") ul").removeClass("ulExpand");	
+			});
+	});	//fin del each()   
+});;
+jQuery(document).ready(function() {
+  jQuery('.view-secciones').accordion({
+    autoHeight: false,
+    collapsible: true,
+    header:".views-row > article > header:first-child",
+    icons: false}).accordion("activate", jQuery(".view-secciones article[data-open='true'] header:first-child")); });
+
+;

@@ -1,0 +1,169 @@
+var Vocento = Vocento || {};
+
+Vocento.MediaGraph = function($, mediaConfig, mediaUtils, pageUrl){
+	
+    /**
+     * Version del js
+     */
+    var version = '2.0';
+    
+    /**
+     * Log
+     */
+    var log = mediaUtils.log;
+    
+    /**
+     * tipo media (video, gallery, audio, graph, videolive, videochat)
+     */
+    var mediaType = 'graph';
+    
+    /**
+     * URL de la pagina actual
+     */
+    var url = (pageUrl) ? pageUrl : document.URL;
+    
+	function cargaGrafico(options){
+		initGraphPlayer(options);
+	}
+	
+	function initGraphPlayer(options){
+		options = addNewOptions(options);
+		urlGraphPlayer = getUrlGraphPlayer(mediaType, options);
+		previewGraphPlayer(urlGraphPlayer, options);
+	}
+	
+	function previewGraphPlayer(urlPlayer, options){
+		mediaUtils.previewPlayer(urlPlayer, options);
+	}
+	
+	function openGrafico(options){
+		showGraphPlayer(options);
+	}
+	
+	function showGraphPlayer(options){
+		options = addNewOptions(options);
+		options.template = options.template.indexOf('ShowGrafico') == -1 ? options.template.concat('ShowGrafico'):options.template;
+		options.idModulo = options.idModulo.indexOf('ShowGrafico') == -1 ? options.idModulo.concat('ShowGrafico'):options.idModulo; 
+		urlGraphPlayer = getUrlGraphPlayer(mediaType, options);
+		getScriptsGraphPlayer(options);
+		viewGraphPlayer(urlGraphPlayer, options);
+	}
+	
+	function viewGraphPlayer(urlPlayer, options){
+		mediaUtils.viewPlayer(urlPlayer, options);
+	}
+	
+	function addNewOptions(options){
+		options.mediaType = mediaType;
+		options.modoExtendido = mediaUtils.isEmpty(options.modoExtendido) ? 'xml' : options.modoExtendido;
+		options.site = mediaUtils.isEmpty(options.site) ? options.medio : options.site;
+		options.medio = options.site;
+		options.idModulo = 	mediaUtils.isEmpty(options.idModulo) ? '' : options.idModulo;
+		options.template = mediaUtils.isEmpty(options.template) ? mediaConfig.sites[options.site]['template-default-player']['graph'] : options.template;
+		options.idModulo = mediaUtils.isEmpty(options.idModulo) ? options.template : options.idModulo;
+		options.edition = mediaUtils.isEmpty(options.edition) ? options.edicionLocal : options.edition;
+		options.edicionLocal = options.edition;
+		options.idPlayer = mediaUtils.isEmpty(options.idPlayer) ? '' : options.idPlayer;
+		options.idDiv = mediaUtils.isEmpty(options.idDivGrafico) ? options.idDiv : options.idDivGrafico;
+		options.idDivGrafico = options.idDiv;
+		options.idOptions = mediaUtils.isEmpty(options.idOpciones) ? options.idOptions : options.idOpciones;
+		options.idOpciones = options.idOptions;
+		options.loid = mediaUtils.isEmpty(options.loid) ? '' : options.loid;
+		options.code = mediaUtils.isEmpty(options.codigoGrafico) ? options.code : options.codigoGrafico;
+		options.codigoGrafico = options.code;
+		options.file = mediaUtils.isEmpty(options.file) ? '' : options.file;
+		options.source = mediaUtils.isEmpty(options.origenGrafico) ? options.source : options.origenGrafico;
+		options.origenGrafico = options.source;
+		options.id = mediaUtils.isEmpty(options.idGrafico) ? options.id : options.idGrafico;
+		options.idGrafico = options.id;
+		options.idChannel = mediaUtils.isEmpty(options.idChannel) ? '' : options.idChannel;
+		options.name = mediaUtils.isEmpty(options.nameGrafico) ? options.name : options.nameGrafico;
+		options.nameGrafico = options.name;
+		options.shortDescription = mediaUtils.isEmpty(options.shortDescriptionGrafico) ? options.shortDescription : options.shortDescriptionGrafico;
+		options.shortDescriptionGrafico = options.shortDescription;
+		options.longDescription = mediaUtils.isEmpty(options.longDescriptionGrafico) ? options.longDescription : options.longDescriptionGrafico;
+		options.longDescriptionGrafico = options.longDescription;
+		options.linkURL = mediaUtils.isEmpty(options.linkURLGrafico) ? options.linkURL : options.linkURLGrafico;
+		options.linkURLGrafico = options.linkURL;
+		options.stillURL = mediaUtils.isEmpty(options.stillURLGrafico) ? options.stillURL : options.stillURLGrafico;
+		options.stillURLGrafico = options.stillURL;
+		options.urlXml = mediaUtils.isEmpty(options.urlXml) ? options.linkURLGrafico : options.urlXml;
+		options.urlXml = mediaUtils.isEmpty(options.urlXml) ? '' : options.urlXml.replace('.html', '.xml');
+		options.author = mediaUtils.isEmpty(options.authorGrafico) ? options.author : options.authorGrafico;
+		options.authorGrafico = options.author;
+		options.firm = mediaUtils.isEmpty(options.originGrafico) ? options.firm : options.originGrafico;
+		options.originGrafico = options.firm;
+		options.autoStartGrafico = mediaUtils.isEmpty(options.autoStartGrafico) ? 'true' : options.autoStartGrafico.toString();
+		options.autoStart = mediaUtils.isEmpty(options.autoStart) ? 'true' : options.autoStart.toString();
+		options.width = mediaUtils.isEmpty(options.widthGrafico) ? options.width : options.widthGrafico;
+		options.widthGrafico = options.width;
+		options.height = mediaUtils.isEmpty(options.heightGrafico) ? options.height : options.heightGrafico;
+		options.heightGrafico = options.height;
+		options.classs = mediaUtils.isEmpty(options.classGrafico) ? options.classs : options.classGrafico;
+		options.classGrafico = options.classs;
+		options.capaModal = mediaUtils.isEmpty(options.capaModal) ? 'false' : options.capaModal.toString();
+		options.modalLayer = mediaUtils.isEmpty(options.modalLayer) ? 'false' : options.modalLayer.toString();
+		options.capaModal = (options.capaModal == 'false' && options.modalLayer == 'false') ? 'false' : 'false';
+		options.modalLayer = options.capaModal;
+		options.live = mediaUtils.isEmpty(options.live) ? 'false' : options.live.toString();
+		options.socialNetworks = mediaUtils.isEmpty(options.socialNetworks) ? 'false' : options.socialNetworks.toString();
+		options.usoResizer = mediaUtils.isEmpty(options.usoResizer) ? 'true' : options.usoResizer;
+		options.resizer = mediaUtils.isEmpty(options.resizer) ? 'true' : options.resizer;
+		options.usoResizer = (options.usoResizer == 'true' && options.resizer == 'true') ? 'true' : 'false';
+		options.resizer = options.usoResizer;
+		options.charset = mediaUtils.isEmpty(options.charset) ? mediaUtils.getCharset() : options.charset;
+		options.language = mediaUtils.isEmpty(options.language) ? mediaUtils.getLanguage() : options.language;
+		options.location = mediaUtils.isEmpty(options.location) ? mediaUtils.getLocation() : options.location;
+		options.device = mediaUtils.isEmpty(options.device) ? mediaUtils.getDevice() : options.device;
+		options.dispositivo = options.device;
+		options.protocol = mediaUtils.isEmpty(options.protocol) ? mediaUtils.getProtocol() : options.protocol;
+		options.gigyaUserType = mediaUtils.isEmpty(options.gigyaUserType) ? mediaUtils.getGigyaUserType() : options.gigyaUserType;
+		
+		optionsTemp = {};
+		if(mediaConfig.sites[options.site]['media-url'][mediaType].indexOf('modgen')){
+			optionsKeys = ['modoExtendido', 'idModulo', 'template', 'medio', 'site', 'edicionLocal', 'idDivGrafico', 'idDiv', 
+			               'idOpciones', 'loid', 'codigoGrafico', 'file', 'origenGrafico', 'source', 'idPlayer', 'idGrafico', 'nameGrafico', 'shortDescriptionGrafico', 
+			               'longDescriptionGrafico', 'linkURLGrafico', 'stillURL', 'stillURLGrafico', 'urlXml', 'authorGrafico', 'originGrafico', 'autoStartGrafico', 
+			               'width', 'height', 'classGrafico', 'capaModal', 'modalLayer', 'live', 'usoResizer', 'charset', 'language', 'location', 
+			               'dispositivo', 'protocol', 'gigyaUserType'];
+		}else{
+			optionsKeys = ['mediaType', 'template', 'site', 'edition', 'idDiv', 'loid', 'code', 'file', 'source', 'idPlayer', 'id', 'idChannel', 'name', 
+			               'shortDescription', 'longDescription', 'linkURL', 'stillURL', 'urlXml', 'author', 'firm', 'autoStart', 
+			               'width', 'height', 'classs', 'modalLayer', 'live', 'socialNetworks', 'resizer', 'charset', 'language', 'location', 'device', 
+			               'protocol', 'gigyaUserType'];
+		}
+		for(var key in options) {
+			if(optionsKeys.indexOf(key) != -1){
+				if(!mediaUtils.isEmpty(options[key])){
+					optionsTemp[key] = options[key];
+				}
+			}
+		}
+		options = optionsTemp;
+		
+		return options;
+	}
+	
+	function getUrlGraphPlayer(mediaType, options){
+		urlGraphPlayer = '';
+		urlGraphPlayer = mediaUtils.getUrlPlayer(mediaType, options);		
+		return urlGraphPlayer;
+	}
+	
+	function getScriptsGraphPlayer(options) {
+		return true;
+	}
+	
+	/**
+	 * Metodos publicos
+	 */
+	return {
+	    version: function() {
+	        return version;
+	    }
+		,cargaGrafico : cargaGrafico
+		,initGraphPlayer : initGraphPlayer
+		,openGrafico : openGrafico
+		,viewGraphPlayer : viewGraphPlayer
+	};
+};

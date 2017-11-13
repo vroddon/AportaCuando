@@ -1,0 +1,27 @@
+<ttk>
+<text>
+
+Fido sleeps today.
+
+</text>
+<metadata>
+  <dct value="20170906"/>
+</metadata>
+<source_tags>
+  <TEXT begin="1" end="21" />
+</source_tags>
+<tarsqi_tags>
+  <docelement begin="2" end="20" id="d1" origin="DOCSTRUCTURE" type="paragraph" />
+  <s begin="2" end="20" id="s1" origin="PREPROCESSOR" />
+  <lex begin="2" end="6" id="l1" lemma="Fido" origin="PREPROCESSOR" pos="NNP" text="Fido" />
+  <ng begin="2" end="6" id="c1" origin="PREPROCESSOR" />
+  <lex begin="7" end="13" id="l2" lemma="sleep" origin="PREPROCESSOR" pos="VBZ" text="sleeps" />
+  <vg begin="7" end="13" id="c2" origin="PREPROCESSOR" />
+  <EVENT begin="7" end="13" aspect="NONE" class="OCCURRENCE" eid="e1" eiid="ei1" epos="VERB" form="sleeps" origin="EVITA" pos="VBZ" tense="PRESENT" />
+  <lex begin="14" end="19" id="l3" lemma="today" origin="PREPROCESSOR" pos="NN" text="today" />
+  <ng begin="14" end="19" id="c3" origin="PREPROCESSOR" />
+  <TIMEX3 begin="14" end="19" origin="GUTIME" tid="t1" type="DATE" value="20170906" />
+  <lex begin="19" end="20" id="l4" lemma="." origin="PREPROCESSOR" pos="." text="." />
+  <TLINK eventInstanceID="ei1" lid="l1" origin="BLINKER-Type-1a" relType="IS_INCLUDED" relatedToTime="t1" />
+</tarsqi_tags>
+</ttk>

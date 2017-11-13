@@ -1,0 +1,3 @@
+var Vocento = Vocento || {};
+
+Vocento.checkAdBlock =  1;

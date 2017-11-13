@@ -1,0 +1,27 @@
+.voc-15-aniv-li {
+  vertical-align: top;
+}
+
+.voc-15-aniv a,
+.voc-15-aniv-li a {
+  display: block;
+  width: 91px;
+  height: 15px;
+  background: url(http://www.elcorreo.com/comun/img/2017/logoVocento15-pq.svg) top left no-repeat;
+  background-size: 91px 15px;
+  text-indent: -9999px;
+}
+
+.voc-15-aniv {
+  position: absolute;
+  top: -22px;
+}
+
+.redS {
+  left: 100px !important;
+}
+
+.voc-15-aniv-sub {
+  width: 256px;
+  height: 41px;
+}

@@ -1,0 +1,149 @@
+/**
+ * INICIO: Funciones invocadas desde antiguos paginas sin namespaces
+ */
+//VIDEO
+//antiguas llamadas de videos desde dominios de abc (abc.es, sevilla.abc.es, lavozdigital.es, hoycinema.abc.es, laguiatv.abc.es)
+function loadVideoABC(NOMBRE_DE_DIV, ANCHURA, ALTURA, RUTA_VIDEO, RUTA_IMAGEN, SITIO, ORIGEN, OPCIONES){
+	mediaVideo.loadVideoABC(NOMBRE_DE_DIV, ANCHURA, ALTURA, RUTA_VIDEO, RUTA_IMAGEN, SITIO, ORIGEN, OPCIONES);
+}
+//antiguas llamadas de videos desde dominios de ppll
+function loadMultimedia(NOMBRE_DE_DIV, ANCHURA, ALTURA, RUTA_VIDEO,RUTA_IMAGEN, SITIO, TITULO, CATEGORY,opciones){
+	if(SITIO == 'sur') SITIO = 'diariosur';
+	if(SITIO == 'elcomerciodigital') SITIO = 'elcomercio';
+	if(SITIO == 'correo' || SITIO == 'elcorreodigital') SITIO = 'elcorreo';
+	if(SITIO == 'norcas' || SITIO == 'nortecastilla') SITIO = 'elnortedecastilla';
+	mediaVideo.loadMultimedia(NOMBRE_DE_DIV, ANCHURA, ALTURA, RUTA_VIDEO,RUTA_IMAGEN, SITIO, TITULO, CATEGORY,opciones);
+}
+function openVideo(opciones){
+	mediaVideo.openVideo(opciones);
+}
+//antiguas llamadas de videos desde dominios de ppll (diariosur.es, diariovasco.com, elcomercio.es, elcorreo.com, eldiariomontanes.es, elnortedecastilla.es, hoy.es, ideal.es, larioja.com, lasprovincias.es, laverdad.es)
+//antiguas llamadas de videos desde dominios de ppvv (finanzas.com, hoymujer.com, vcfplay)
+function cargaVideo(opciones){
+	mediaVideo.cargaVideo(opciones);
+}
+function openVideo(opciones){
+	//opciones.capaModal = 'false';
+	mediaVideo.openVideo(opciones);
+}
+function openVideoCapaModal(opciones){
+	opciones.capaModal = 'true';
+	mediaVideo.openVideo(opciones);
+}
+function recargarGoogleAnalytics(url){
+	mediaUtils.recargarGoogleAnalytics(url);
+}
+
+//antiguas llamadas a los eventos del player de brightcove
+function onTemplateLoaded(idPlayer) {
+	mediaVideo.onTemplateLoad(idPlayer);
+}
+function onTemplateLoad(idPlayer){
+	mediaVideo.onTemplateLoad(idPlayer);
+}
+function onTemplateReady(event) {
+	mediaVideo.onTemplateReady(event);
+}
+function onPlay(event) {
+	mediaVideo.onMediaPlay(event);
+}
+
+//GALLERY
+function cargaGaleria(opciones){
+	mediaGallery.cargaGaleria(opciones);
+}
+function openGaleria(opciones){
+	mediaGallery.openGaleria(opciones);
+}
+
+//GRAPH
+function cargaGrafico(opciones){
+	mediaGraph.cargaGrafico(opciones);
+}
+function openGrafico(opciones){
+	mediaGraph.openGrafico(opciones);
+}
+
+//AUDIO
+function cargaAudio(opciones){
+	mediaAudio.cargaAudio(opciones);
+}
+function openAudio(opciones){
+	mediaAudio.openAudio(opciones);
+}
+
+//VIDEOLIVE
+function cargaDirecto(opciones){
+	mediaVideolive.cargaDirecto(opciones);
+}
+function openDirecto(opciones){
+	mediaVideolive.openDirecto(opciones);
+}
+
+//UTILS
+function normat(string){
+	mediaUtils.normat(string);
+}
+
+function utf8_encode(string){
+	mediaUtils.utf8_encode(string);
+}
+
+function utf8_decode(string){
+	mediaUtils.utf8_decode(string);
+}
+
+function str_replace(search, replace, string){
+	mediaUtils.replaceAll(search, replace, string);
+}
+/**
+ * FIN: Funciones invocadas desde antiguos paginas sin namespaces
+ */
+
+/**
+ * INICIO: Funciones invocadas desde el plugin de videoplaza para mostrar publicidad en video
+ */
+function mandarOAS(){
+	if(typeof OAS_sitepage === 'undefined'){
+		return this.mediaUtils.getOAS_sitepage('');
+	}
+	//abc, sevilla.abc, lavozdigital
+	if(typeof OAS_sitepage_dc !== 'undefined'){
+		return this.mediaUtils.getOAS_sitepage(OAS_sitepage_dc);
+	}
+	//m.abc, m.sevilla.abc, m.lavozdigital
+	if(typeof OAS !== 'undefined'){
+		  return this.mediaUtils.getOAS_sitepage(OAS);
+	}
+	return this.mediaUtils.getOAS_sitepage(OAS_sitepage);
+}
+
+function mandarOASJS(){
+	if(typeof OAS_sitepage === 'undefined'){
+		return 'mandarOAS' + this.mediaUtils.getOAS_sitepage('');
+	}
+	//abc, sevilla.abc, lavozdigital
+	if(typeof OAS_sitepage_dc !== 'undefined'){
+		  return 'mandarOAS' + this.mediaUtils.getOAS_sitepage(OAS_sitepage_dc);
+	}
+	//m.abc, m.sevilla.abc, m.lavozdigital
+	if(typeof OAS !== 'undefined'){
+		  return 'mandarOAS' + this.mediaUtils.getOAS_sitepage(OAS);
+	}
+	return 'mandarOAS' + this.mediaUtils.getOAS_sitepage(OAS_sitepage);
+}
+
+//modificado por JSJ, da problemas en IE8 el addEventListener y como es solo para moviles se quita para cualquier IE
+if(navigator.appName !== 'Microsoft Internet Explorer') {
+	window.addEventListener('message', receiveMessage, false);
+}else{
+}
+
+function receiveMessage (event){
+	if (event.data == 'mandarOASJS'){
+		event.source.postMessage(String(mandarOASJS()), event.origin);
+	}
+}
+/**
+ * FIN: Funciones invocadas desde el plugin de videoplaza para mostrar publicidad en video
+ */
