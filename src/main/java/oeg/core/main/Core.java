@@ -107,8 +107,7 @@ public class Core {
     }
 
     /**
-     * Obtiene la raíz especificada por la variable de entorno. Por ejemplo,
-     * D:\svn\lps-bigger
+     * Obtiene la raíz especificada por la variable de entorno.
      *
      * @throws Exception
      */
@@ -382,6 +381,7 @@ public class Core {
         try {
             //LO PRIMERO BUSCA EL ARCHIVO DE CONFIGURACIÓN EN LA CARPETA 
             File f5 = new File("./LEGALPROY.properties");
+//            File f5 = new File("./LEGALPROY.properties");
             if (!f5.exists()) {
                 //LO SEGUNDO SE BUSCA EN LA RAÍZ DEL LEGALPROY
                 String root = Core.getRootFolder();

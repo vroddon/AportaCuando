@@ -150,7 +150,7 @@ public class InformacionSistema {
     public String getMavenVersionInfo()
     {
         String s ="";
-        InputStream resourceAsStream = this.getClass().getResourceAsStream("/META-INF/oeg/lpsbigger-core/pom.properties");
+        InputStream resourceAsStream = this.getClass().getResourceAsStream("/META-INF/AportaCuando/target/maven-archiver/pom.properties");
         if (resourceAsStream==null)
             return "1.0";
         Properties prop = new Properties();

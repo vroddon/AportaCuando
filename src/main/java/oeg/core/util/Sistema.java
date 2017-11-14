@@ -10,14 +10,14 @@ public class Sistema {
 
 
     /**
-     * Se obtiene la variable de entorno LPS_BIGGER usando System.getenv
+     * Se obtiene la variable de entorno LEGALPROY usando System.getenv
      * Y luego se reemplaza en una cadena ya sea en Linux ya sea en Unix
      */
     public static String env(String sin)
     {
         String sout="";
-        sout = sin.replace("%LPS_BIGGER%", Core.getRootFolderSimple());
-        sout = sout.replace("$LPS_BIGGER", Core.getRootFolderSimple());
+        sout = sin.replace("%LEGALPROY%", Core.getRootFolderSimple());
+        sout = sout.replace("$LEGALPROY", Core.getRootFolderSimple());
         return sout;
     }
     
